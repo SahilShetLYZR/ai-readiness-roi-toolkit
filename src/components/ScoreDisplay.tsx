@@ -19,13 +19,16 @@ const ScoreDisplay = ({ score, industry }: ScoreDisplayProps) => {
 
   const handleDownload = async () => {
     try {
-      await toPDF(resultRef, {
-        filename: `ai-readiness-assessment-${industry?.toLowerCase()}.pdf`,
-      });
-      toast({
-        title: "Success",
-        description: "Your assessment results have been downloaded",
-      });
+      if (resultRef.current) {
+        await toPDF({ 
+          element: resultRef.current,
+          filename: `ai-readiness-assessment-${industry?.toLowerCase()}.pdf`,
+        });
+        toast({
+          title: "Success",
+          description: "Your assessment results have been downloaded",
+        });
+      }
     } catch (error) {
       toast({
         title: "Error",

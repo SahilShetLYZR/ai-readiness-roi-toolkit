@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Card } from "./ui/card";
 import { Label } from "./ui/label";
 import { Slider } from "./ui/slider";
@@ -104,11 +104,13 @@ const ROICalculatorTab = () => {
 
   const handleDownload = async () => {
     try {
-      await toPDF(resultRef);
-      toast({
-        title: "Success",
-        description: "ROI report downloaded successfully",
-      });
+      if (resultRef.current) {
+        await toPDF({ element: resultRef.current });
+        toast({
+          title: "Success",
+          description: "ROI report downloaded successfully",
+        });
+      }
     } catch (error) {
       toast({
         title: "Error",
