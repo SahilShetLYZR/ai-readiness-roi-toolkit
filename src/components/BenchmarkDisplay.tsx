@@ -1,6 +1,6 @@
 import { Progress } from "@/components/ui/progress";
 import { Industry } from "@/utils/industryWeights";
-import { industryBenchmarks } from "@/utils/industryBenchmarks";
+import { industryBenchmarks, getReadinessLevel } from "@/utils/industryBenchmarks";
 
 interface BenchmarkDisplayProps {
   score: number;
@@ -9,15 +9,9 @@ interface BenchmarkDisplayProps {
 
 const BenchmarkDisplay = ({ score, industry }: BenchmarkDisplayProps) => {
   const benchmark = industryBenchmarks[industry];
+  const readinessLevel = getReadinessLevel(score, industry);
   
-  if (!benchmark) return null;
-
-  const getScoreLabel = (score: number) => {
-    if (score >= benchmark.topQuartile) return "Leading";
-    if (score >= benchmark.average) return "Above Average";
-    if (score >= benchmark.bottomQuartile) return "Below Average";
-    return "Lagging";
-  };
+  if (!benchmark || !readinessLevel) return null;
 
   return (
     <div className="mt-8 p-6 bg-white rounded-xl shadow-sm border border-gray-100">
@@ -25,17 +19,16 @@ const BenchmarkDisplay = ({ score, industry }: BenchmarkDisplayProps) => {
       
       <div className="space-y-6">
         <div className="relative pt-4">
-          <Progress value={benchmark.bottomQuartile} className="h-2 bg-gray-100" />
-          <Progress value={benchmark.average} className="h-2 -mt-2 bg-gray-200" />
-          <Progress value={benchmark.topQuartile} className="h-2 -mt-2 bg-gray-300" />
+          <Progress value={benchmark.lagging.max} className="h-2 bg-red-100" />
+          <Progress value={benchmark.average.max} className="h-2 -mt-2 bg-yellow-100" />
+          <Progress value={benchmark.bestInClass.max} className="h-2 -mt-2 bg-green-100" />
           <Progress value={score} className="h-3 -mt-2.5 bg-lyzr-purple" />
           
           <div className="flex justify-between mt-2 text-sm text-gray-600">
             <span>0</span>
-            <span>25</span>
-            <span>50</span>
-            <span>75</span>
-            <span>100</span>
+            <span>{benchmark.lagging.max}</span>
+            <span>{benchmark.average.max}</span>
+            <span>{benchmark.bestInClass.max}</span>
           </div>
         </div>
 
@@ -45,20 +38,36 @@ const BenchmarkDisplay = ({ score, industry }: BenchmarkDisplayProps) => {
             <span className="font-semibold text-lyzr-purple">{score}</span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-sm font-medium">Industry Average</span>
-            <span className="font-semibold text-gray-600">{benchmark.average}</span>
+            <span className="text-sm font-medium">Industry Average Range</span>
+            <span className="font-semibold text-gray-600">
+              {benchmark.average.min}-{benchmark.average.max}
+            </span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-sm font-medium">Top Quartile</span>
-            <span className="font-semibold text-gray-600">{benchmark.topQuartile}</span>
+            <span className="text-sm font-medium">Best-in-Class Range</span>
+            <span className="font-semibold text-gray-600">
+              {benchmark.bestInClass.min}-{benchmark.bestInClass.max}
+            </span>
           </div>
         </div>
 
-        <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-          <p className="text-sm">
+        <div className={`mt-4 p-4 rounded-lg ${
+          readinessLevel.color === "green" ? "bg-green-50" :
+          readinessLevel.color === "yellow" ? "bg-yellow-50" :
+          "bg-red-50"
+        }`}>
+          <p className="text-sm mb-2">
             <span className="font-medium">Performance: </span>
-            Your organization is <span className="font-semibold text-lyzr-purple">{getScoreLabel(score)}</span> in {industry}
+            {readinessLevel.message}
           </p>
+          <div className="mt-3">
+            <p className="text-sm font-medium mb-2">Recommendations:</p>
+            <ul className="list-disc pl-5 text-sm space-y-1">
+              {readinessLevel.recommendations.map((rec, index) => (
+                <li key={index}>{rec}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>

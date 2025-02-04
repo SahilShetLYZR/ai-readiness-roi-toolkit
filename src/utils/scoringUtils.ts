@@ -3,24 +3,29 @@ import { Industry, getIndustryWeights } from "./industryWeights";
 const calculatePrimaryGoalAndCapabilitiesScore = (answers: Record<number, string[]>): number => {
   const goalAnswers = answers[1] || [];
   const capabilityAnswers = answers[2] || [];
+  const totalPossible = 20; // Max 20 points for this category
   const totalSelected = goalAnswers.length + capabilityAnswers.length;
-  return Math.min(Math.round((totalSelected / 10) * 20), 20); // Max 20 points
+  const maxSelections = 10; // 5 options each for goals and capabilities
+  return Math.min(Math.round((totalSelected / maxSelections) * totalPossible), totalPossible);
 };
 
 const calculateSuccessMetricsScore = (answers: Record<number, string[]>): number => {
   const metricsAnswers = answers[3] || [];
-  return Math.min(Math.round((metricsAnswers.length / 5) * 10), 10); // Max 10 points
+  const totalPossible = 10;
+  return Math.min(Math.round((metricsAnswers.length / 5) * totalPossible), totalPossible);
 };
 
 const calculateDataChallengesScore = (answers: Record<number, string[]>): number => {
   const dataChallenges = answers[4] || [];
-  return Math.min(Math.round((dataChallenges.length / 5) * 10), 10); // Max 10 points
+  const totalPossible = 10;
+  return Math.min(Math.round((dataChallenges.length / 5) * totalPossible), totalPossible);
 };
 
 const calculateIntegrationChallengesScore = (answers: Record<number, string[]>): number => {
   const challenges = answers[5] || [];
+  const totalPossible = 10;
   // More challenges = lower score
-  return Math.max(10 - Math.round((challenges.length / 5) * 10), 0); // Max 10 points
+  return Math.max(totalPossible - Math.round((challenges.length / 5) * totalPossible), 0);
 };
 
 const calculateAutomationScore = (answers: Record<number, string[]>): number => {
@@ -32,7 +37,7 @@ const calculateAutomationScore = (answers: Record<number, string[]>): number => 
     "Manual processes with automation plans": 2,
     "Completely manual processes": 0,
   };
-  return scores[automationLevel] || 0; // Max 10 points
+  return scores[automationLevel] || 0;
 };
 
 const calculateGovernanceAndResponsibleAIScore = (answers: Record<number, string[]>): number => {
@@ -55,19 +60,19 @@ const calculateGovernanceAndResponsibleAIScore = (answers: Record<number, string
     "No measures in place": 0,
   };
 
-  return (governanceScores[governanceAnswer] || 0) + (responsibleAIScores[responsibleAIAnswer] || 0); // Max 15 points
+  return (governanceScores[governanceAnswer] || 0) + (responsibleAIScores[responsibleAIAnswer] || 0);
 };
 
 const calculateAdoptionBarriersScore = (answers: Record<number, string[]>): number => {
   const barriers = answers[9]?.[0] || "";
   const scores: Record<string, number> = {
-    "Budget constraints": 6, // Easier to address
+    "Budget constraints": 6,
     "Lack of skilled personnel": 4,
-    "Data quality issues": 8, // More manageable with AI
+    "Data quality issues": 8,
     "Integration complexity": 5,
-    "Regulatory compliance": 7, // Can be addressed with proper governance
+    "Regulatory compliance": 7,
   };
-  return scores[barriers] || 0; // Max 10 points
+  return scores[barriers] || 0;
 };
 
 const calculateEndToEndIntegrationScore = (answers: Record<number, string[]>): number => {
@@ -79,19 +84,19 @@ const calculateEndToEndIntegrationScore = (answers: Record<number, string[]>): n
     "Planning integration": 4,
     "No integration yet": 0,
   };
-  return scores[integration] || 0; // Max 14 points
+  return scores[integration] || 0;
 };
 
 const calculateBaseScore = (answers: Record<number, string[]>): number => {
   const scores = [
-    calculatePrimaryGoalAndCapabilitiesScore(answers),
-    calculateSuccessMetricsScore(answers),
-    calculateDataChallengesScore(answers),
-    calculateIntegrationChallengesScore(answers),
-    calculateAutomationScore(answers),
-    calculateGovernanceAndResponsibleAIScore(answers),
-    calculateAdoptionBarriersScore(answers),
-    calculateEndToEndIntegrationScore(answers),
+    calculatePrimaryGoalAndCapabilitiesScore(answers), // Max 20
+    calculateSuccessMetricsScore(answers), // Max 10
+    calculateDataChallengesScore(answers), // Max 10
+    calculateIntegrationChallengesScore(answers), // Max 10
+    calculateAutomationScore(answers), // Max 10
+    calculateGovernanceAndResponsibleAIScore(answers), // Max 15
+    calculateAdoptionBarriersScore(answers), // Max 10
+    calculateEndToEndIntegrationScore(answers), // Max 14
   ];
 
   return Math.min(scores.reduce((a, b) => a + b, 0), 99);
@@ -109,22 +114,30 @@ export const calculateScore = (
   const weights = getIndustryWeights(industry);
   const dataChallenges = answers[4] || [];
   
-  // Adjust weights based on data challenges
+  // Adjust score based on industry weights
   let finalScore = baseScore;
+  
+  // Data challenges affect weight more in data-intensive industries
   if (dataChallenges.length > 0) {
     finalScore *= weights.dataWeight;
   }
   
-  // Apply other weights based on answers
+  // Apply governance weight based on regulatory requirements
   if (answers[7] || answers[8]) {
     finalScore *= weights.governanceWeight;
   }
+  
+  // AI capabilities weight affects industries with high automation potential
   if (answers[2]?.length > 0) {
     finalScore *= weights.aiCapabilitiesWeight;
   }
+  
+  // Automation weight varies by industry maturity
   if (answers[6]) {
     finalScore *= weights.automationWeight;
   }
+  
+  // Responsible AI weight is higher in sensitive industries
   if (answers[8]) {
     finalScore *= weights.responsibleAIWeight;
   }
