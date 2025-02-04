@@ -9,13 +9,21 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-lyzr-blue mb-4">
-            AI Readiness & ROI Calculator
-          </h1>
-          <p className="text-lg text-gray-600">
-            Evaluate your organization's AI readiness and calculate potential ROI
-          </p>
+        <div className="flex items-center justify-between mb-12">
+          <img 
+            src="https://www.lyzr.ai/static/img/lyzr-logo.svg" 
+            alt="Lyzr Logo" 
+            className="h-8 w-auto"
+          />
+          <div className="text-center flex-grow">
+            <h1 className="text-4xl font-bold text-lyzr-blue">
+              Lyzr AI Readiness & ROI Calculator
+            </h1>
+            <p className="text-lg text-gray-600 mt-4">
+              Evaluate your organization's AI readiness and calculate potential ROI
+            </p>
+          </div>
+          <div className="w-[100px]"></div> {/* This creates balance with the logo */}
         </div>
 
         <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
