@@ -5,6 +5,8 @@ import ScoreDisplay from "./ScoreDisplay";
 import { calculateScore } from "@/utils/scoringUtils";
 import { Question } from "@/types/assessment";
 import { Industry } from "@/utils/industryWeights";
+import { Button } from "./ui/button";
+import { useToast } from "./ui/use-toast";
 
 const industries = [
   "Healthcare",
@@ -144,12 +146,38 @@ const questions: Question[] = [
 const AssessmentTab = () => {
   const [answers, setAnswers] = useState<Record<number, string[]>>({});
   const [selectedIndustry, setSelectedIndustry] = useState<Industry | "">("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { toast } = useToast();
 
   const handleAnswer = (questionId: number, selected: string[]) => {
     setAnswers((prev) => ({
       ...prev,
       [questionId]: selected,
     }));
+  };
+
+  const handleSubmit = () => {
+    // Check if all questions are answered
+    const answeredQuestions = Object.keys(answers).length;
+    if (answeredQuestions < questions.length) {
+      toast({
+        title: "Please answer all questions",
+        description: `You have answered ${answeredQuestions} out of ${questions.length} questions.`,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!selectedIndustry) {
+      toast({
+        title: "Please select your industry",
+        description: "Industry selection is required for accurate assessment.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitted(true);
   };
 
   return (
@@ -175,10 +203,21 @@ const AssessmentTab = () => {
         onAnswer={handleAnswer}
       />
 
-      <ScoreDisplay 
-        score={calculateScore(answers, selectedIndustry as Industry)} 
-        industry={selectedIndustry as Industry}
-      />
+      {!isSubmitted ? (
+        <div className="mt-8 flex justify-center">
+          <Button 
+            onClick={handleSubmit}
+            className="bg-lyzr-purple hover:bg-lyzr-purple/90 text-white px-8 py-2"
+          >
+            Submit Assessment
+          </Button>
+        </div>
+      ) : (
+        <ScoreDisplay 
+          score={calculateScore(answers, selectedIndustry as Industry)} 
+          industry={selectedIndustry as Industry}
+        />
+      )}
     </div>
   );
 };
