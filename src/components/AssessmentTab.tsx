@@ -1,7 +1,9 @@
 import { useState } from "react";
-import QuestionCard from "./QuestionCard";
-import CircularProgress from "./CircularProgress";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import IndustrySelector from "./IndustrySelector";
+import QuestionsList from "./QuestionsList";
+import ScoreDisplay from "./ScoreDisplay";
+import { calculateScore } from "@/utils/scoringUtils";
+import { Question } from "@/types/assessment";
 
 const industries = [
   "Healthcare",
@@ -15,7 +17,7 @@ const industries = [
   "Energy & Utilities",
 ];
 
-const questions = [
+const questions: Question[] = [
   {
     id: 1,
     question: "What primary goal are you looking to achieve with AI?",
@@ -149,22 +151,6 @@ const AssessmentTab = () => {
     }));
   };
 
-  const calculateScore = () => {
-    const totalQuestions = questions.length;
-    const answeredQuestions = Object.keys(answers).length;
-    const baseScore = (answeredQuestions / totalQuestions) * 100;
-
-    const multiSelectBonus = Object.entries(answers).reduce((acc, [id, selected]) => {
-      const question = questions.find((q) => q.id === Number(id));
-      if (question?.type === "multi" && selected.length > 1) {
-        return acc + 5;
-      }
-      return acc;
-    }, 0);
-
-    return Math.min(Math.round(baseScore + multiSelectBonus), 100);
-  };
-
   return (
     <div className="max-w-3xl mx-auto">
       <div className="mb-8 text-center">
@@ -175,40 +161,20 @@ const AssessmentTab = () => {
           Answer these questions to evaluate your organization's AI readiness
         </p>
         
-        <div className="max-w-xs mx-auto">
-          <Select value={selectedIndustry} onValueChange={setSelectedIndustry}>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Select your industry" />
-            </SelectTrigger>
-            <SelectContent>
-              {industries.map((industry) => (
-                <SelectItem key={industry} value={industry}>
-                  {industry}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+        <IndustrySelector
+          selectedIndustry={selectedIndustry}
+          onIndustryChange={setSelectedIndustry}
+          industries={industries}
+        />
       </div>
 
-      <div className="space-y-6 mb-8">
-        {questions.map((q) => (
-          <QuestionCard
-            key={q.id}
-            question={q.question}
-            options={q.options}
-            type={q.type as "single" | "multi"}
-            selected={answers[q.id] || []}
-            onSelect={(selected) => handleAnswer(q.id, selected)}
-            questionNumber={q.id}
-          />
-        ))}
-      </div>
+      <QuestionsList
+        questions={questions}
+        answers={answers}
+        onAnswer={handleAnswer}
+      />
 
-      <div className="flex flex-col items-center justify-center p-8 bg-gray-50 rounded-xl">
-        <h3 className="text-xl font-semibold mb-4">Your Readiness Score</h3>
-        <CircularProgress score={calculateScore()} />
-      </div>
+      <ScoreDisplay score={calculateScore(answers)} />
     </div>
   );
 };
