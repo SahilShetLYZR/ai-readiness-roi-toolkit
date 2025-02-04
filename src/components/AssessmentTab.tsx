@@ -4,6 +4,7 @@ import QuestionsList from "./QuestionsList";
 import ScoreDisplay from "./ScoreDisplay";
 import { calculateScore } from "@/utils/scoringUtils";
 import { Question } from "@/types/assessment";
+import { Industry } from "@/utils/industryWeights";
 
 const industries = [
   "Healthcare",
@@ -15,7 +16,7 @@ const industries = [
   "Government & Public Sector",
   "Technology & Software",
   "Energy & Utilities",
-];
+] as const;
 
 const questions: Question[] = [
   {
@@ -142,7 +143,7 @@ const questions: Question[] = [
 
 const AssessmentTab = () => {
   const [answers, setAnswers] = useState<Record<number, string[]>>({});
-  const [selectedIndustry, setSelectedIndustry] = useState<string>("");
+  const [selectedIndustry, setSelectedIndustry] = useState<Industry | "">("");
 
   const handleAnswer = (questionId: number, selected: string[]) => {
     setAnswers((prev) => ({
@@ -174,7 +175,7 @@ const AssessmentTab = () => {
         onAnswer={handleAnswer}
       />
 
-      <ScoreDisplay score={calculateScore(answers)} />
+      <ScoreDisplay score={calculateScore(answers, selectedIndustry as Industry)} />
     </div>
   );
 };

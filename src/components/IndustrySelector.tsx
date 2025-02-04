@@ -1,16 +1,30 @@
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Industry } from "@/utils/industryWeights";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface IndustrySelectorProps {
-  selectedIndustry: string;
-  onIndustryChange: (value: string) => void;
-  industries: string[];
+  selectedIndustry: Industry | "";
+  onIndustryChange: (industry: Industry | "") => void;
+  industries: readonly Industry[];
 }
 
-const IndustrySelector = ({ selectedIndustry, onIndustryChange, industries }: IndustrySelectorProps) => {
+const IndustrySelector = ({
+  selectedIndustry,
+  onIndustryChange,
+  industries,
+}: IndustrySelectorProps) => {
   return (
-    <div className="max-w-xs mx-auto">
-      <Select value={selectedIndustry} onValueChange={onIndustryChange}>
-        <SelectTrigger className="w-full">
+    <div className="w-full max-w-xs mx-auto mb-8">
+      <Select
+        value={selectedIndustry}
+        onValueChange={(value) => onIndustryChange(value as Industry)}
+      >
+        <SelectTrigger>
           <SelectValue placeholder="Select your industry" />
         </SelectTrigger>
         <SelectContent>
