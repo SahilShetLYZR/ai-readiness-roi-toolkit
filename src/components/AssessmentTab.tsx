@@ -175,7 +175,10 @@ const AssessmentTab = () => {
         onAnswer={handleAnswer}
       />
 
-      <ScoreDisplay score={calculateScore(answers, selectedIndustry as Industry)} />
+      <ScoreDisplay 
+        score={calculateScore(answers, selectedIndustry as Industry)} 
+        industry={selectedIndustry as Industry}
+      />
     </div>
   );
 };
