@@ -4,7 +4,7 @@ import BenchmarkDisplay from "./BenchmarkDisplay";
 import { Industry } from "@/utils/industryWeights";
 import { Button } from "./ui/button";
 import { Download } from "lucide-react";
-import { generatePDF } from "react-to-pdf";
+import { usePDF } from "react-to-pdf";
 import { useToast } from "./ui/use-toast";
 
 interface ScoreDisplayProps {
@@ -15,10 +15,11 @@ interface ScoreDisplayProps {
 const ScoreDisplay = ({ score, industry }: ScoreDisplayProps) => {
   const { toast } = useToast();
   const resultRef = React.useRef<HTMLDivElement>(null);
+  const { toPDF } = usePDF();
 
   const handleDownload = async () => {
     try {
-      await generatePDF(resultRef, {
+      await toPDF(resultRef, {
         filename: `ai-readiness-assessment-${industry?.toLowerCase()}.pdf`,
       });
       toast({
