@@ -11,7 +11,7 @@ const Index = () => {
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-12">
           <img 
-            src="https://www.lyzr.ai/static/img/lyzr-logo.svg" 
+            src="https://www.lyzr.ai/wp-content/uploads/2023/11/cropped-Lyzr-Logo-1.png" 
             alt="Lyzr Logo" 
             className="h-8 w-auto"
           />
