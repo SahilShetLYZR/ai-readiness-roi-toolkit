@@ -25,7 +25,7 @@ const ScoreDisplay = ({ score, industry }: ScoreDisplayProps) => {
       <div className="flex justify-center mt-6">
         <Button
           onClick={() => window.open("https://www.lyzr.ai/book-demo/", "_blank")}
-          className="bg-lyzr-purple hover:bg-lyzr-purple/90 text-white"
+          className="bg-gradient-to-r from-violet-500 to-rose-500 hover:opacity-90 text-white border-0"
         >
           <ExternalLink className="w-4 h-4 mr-2" />
           Book a Demo
