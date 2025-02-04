@@ -15,7 +15,7 @@ const BenchmarkDisplay = ({ score, industry }: BenchmarkDisplayProps) => {
 
   return (
     <div className="mt-8 p-6 bg-white rounded-xl shadow-sm border border-gray-100">
-      <h3 className="text-lg font-semibold mb-4">Industry Benchmark Comparison</h3>
+      <h3 className="text-lg font-semibold mb-4">Benchmark comparison for {industry}</h3>
       
       <div className="space-y-6">
         <div className="relative pt-4">
