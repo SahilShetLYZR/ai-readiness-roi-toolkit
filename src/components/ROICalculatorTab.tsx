@@ -57,13 +57,13 @@ const ROICalculatorTab = () => {
   );
   const [departmentCounts, setDepartmentCounts] = useState<{
     [key: string]: number;
-  }>(Object.fromEntries(departments.map((dept) => [dept, 10])));
+  }>(Object.fromEntries(departments.map((dept) => [dept, 5])));
   const [averageSalary, setAverageSalary] = useState<number>(
     selectedCurrency.defaultSalary
   );
   const [efficiencyGain, setEfficiencyGain] = useState<number>(30);
   const [currentCosts, setCurrentCosts] = useState<number>(50000);
-  const [aiCost] = useState<number>(2100); // Monthly cost per AI agent
+  const [aiCost] = useState<number>(2100);
 
   const { toPDF } = usePDF();
   const { toast } = useToast();
@@ -151,15 +151,15 @@ const ROICalculatorTab = () => {
 
         {/* Department Headcounts */}
         <div className="space-y-4 mb-6">
-          <h3 className="text-lg font-semibold">Employee Headcount</h3>
+          <h3 className="text-lg font-semibold">Employee Headcount (FTEs)</h3>
           {departments.map((dept) => (
             <div key={dept} className="space-y-2">
               <Label>{dept}</Label>
               <div className="flex items-center gap-4">
                 <Slider
-                  min={10}
-                  max={10000}
-                  step={10}
+                  min={0}
+                  max={200}
+                  step={1}
                   value={[departmentCounts[dept]]}
                   onValueChange={(value) =>
                     setDepartmentCounts((prev) => ({
@@ -169,7 +169,7 @@ const ROICalculatorTab = () => {
                   }
                   className="flex-1"
                 />
-                <span className="w-20 text-right">{departmentCounts[dept]}</span>
+                <span className="w-20 text-right">{departmentCounts[dept]} FTEs</span>
               </div>
             </div>
           ))}
@@ -178,12 +178,17 @@ const ROICalculatorTab = () => {
         {/* Average Salary */}
         <div className="mb-6">
           <Label>Average Annual Salary Per Employee</Label>
-          <Input
-            type="number"
-            value={averageSalary}
-            onChange={(e) => setAverageSalary(Number(e.target.value))}
-            className="mt-2"
-          />
+          <div className="relative mt-2">
+            <span className="absolute left-3 top-2.5 text-gray-500">
+              {selectedCurrency.symbol}
+            </span>
+            <Input
+              type="number"
+              value={averageSalary}
+              onChange={(e) => setAverageSalary(Number(e.target.value))}
+              className="pl-6"
+            />
+          </div>
         </div>
 
         {/* Efficiency Gain */}
@@ -204,12 +209,17 @@ const ROICalculatorTab = () => {
         {/* Current Costs */}
         <div className="mb-6">
           <Label>Current Annual Software & Maintenance Costs</Label>
-          <Input
-            type="number"
-            value={currentCosts}
-            onChange={(e) => setCurrentCosts(Number(e.target.value))}
-            className="mt-2"
-          />
+          <div className="relative mt-2">
+            <span className="absolute left-3 top-2.5 text-gray-500">
+              {selectedCurrency.symbol}
+            </span>
+            <Input
+              type="number"
+              value={currentCosts}
+              onChange={(e) => setCurrentCosts(Number(e.target.value))}
+              className="pl-6"
+            />
+          </div>
         </div>
       </Card>
 
