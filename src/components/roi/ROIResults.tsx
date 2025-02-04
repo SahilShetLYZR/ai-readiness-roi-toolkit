@@ -46,14 +46,19 @@ const ROIResults = ({ chartData, selectedCurrency }: ROIResultsProps) => {
       year5: calculateAICosts(chartData[2].savings, 5),
       year7: calculateAICosts(chartData[2].savings, 7),
     },
-    {
-      category: "Your Net Savings",
-      year1: chartData[0].savings,
-      year3: chartData[1].savings,
-      year5: chartData[2].savings,
-      year7: chartData[2].savings * 1.3,
-    },
   ];
+
+  // Calculate net savings as human costs minus AI costs
+  const netSavings = {
+    category: "Your Net Savings",
+    year1: tableData[0].year1 - tableData[1].year1,
+    year3: tableData[0].year3 - tableData[1].year3,
+    year5: tableData[0].year5 - tableData[1].year5,
+    year7: tableData[0].year7 - tableData[1].year7,
+  };
+
+  // Add net savings to table data
+  tableData.push(netSavings);
 
   const formatCurrency = (value: number) => {
     return `${selectedCurrency.symbol}${Math.abs(value).toLocaleString(undefined, {
