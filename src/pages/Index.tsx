@@ -13,7 +13,7 @@ const Index = () => {
           <img 
             src="https://i0.wp.com/www.lyzr.ai/wp-content/uploads/2024/11/cropped_lyzr_logo_1.webp?fit=452%2C180&ssl=1" 
             alt="Lyzr Logo" 
-            className="h-8 w-auto"
+            className="h-16 w-auto"
           />
           <div className="text-center flex-grow">
             <h1 className="text-4xl font-bold text-lyzr-blue">
