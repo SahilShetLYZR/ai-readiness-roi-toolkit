@@ -21,7 +21,7 @@ const ScoreDisplay = ({ score, industry }: ScoreDisplayProps) => {
     try {
       if (resultRef.current) {
         await toPDF({ 
-          element: resultRef.current,
+          ref: resultRef.current,
           filename: `ai-readiness-assessment-${industry?.toLowerCase()}.pdf`,
         });
         toast({

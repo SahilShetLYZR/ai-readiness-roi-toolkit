@@ -75,7 +75,7 @@ const ROICalculatorTab = () => {
   const handleDownload = async () => {
     try {
       if (resultRef.current) {
-        await toPDF({ targetRef: resultRef });
+        await toPDF({ ref: resultRef });
         toast({
           title: "Success",
           description: "ROI report downloaded successfully",
