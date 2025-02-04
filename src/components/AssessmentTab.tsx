@@ -54,14 +54,14 @@ const questions = [
   },
   {
     id: 4,
-    question: "How well does your company understand the 5 V's of Data (Volume, Variety, Velocity, Veracity, and Value)?",
-    type: "single",
+    question: "What challenges do you face with your data?",
+    type: "multi",
     options: [
-      "Very well - We actively manage all aspects",
-      "Moderately - We understand but don't fully implement",
-      "Basic understanding - We're learning",
-      "Limited - We need significant improvement",
-      "Not at all - We're just starting",
+      "Volume – We have too much data and need an AI solution to process it efficiently",
+      "Variety – We need to process data from multiple sources (PDFs, Word docs, images, etc.)",
+      "Velocity – Our data is generated too fast for us to analyze in real-time",
+      "Veracity – Our data isn't always accurate or trustworthy, making AI insights unreliable",
+      "Value – We struggle to extract useful business insights from our data",
     ],
   },
   {
