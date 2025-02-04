@@ -15,7 +15,7 @@ const DepartmentHeadcount = ({
 }: DepartmentHeadcountProps) => {
   return (
     <div className="space-y-4 mb-6">
-      <h3 className="text-lg font-semibold">Employee Headcount (FTEs)</h3>
+      <h3 className="text-lg font-semibold">Employee Headcount (Full-Time Employees)</h3>
       {departments.map((dept) => (
         <div key={dept} className="space-y-2">
           <Label>{dept}</Label>

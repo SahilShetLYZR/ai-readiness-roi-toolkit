@@ -3,8 +3,6 @@ import { Card } from "./ui/card";
 import { Label } from "./ui/label";
 import { Slider } from "./ui/slider";
 import { Input } from "./ui/input";
-import { usePDF } from "react-to-pdf";
-import { useToast } from "./ui/use-toast";
 import DepartmentHeadcount from "./roi/DepartmentHeadcount";
 import CurrencySelector, { Currency } from "./roi/CurrencySelector";
 import ROIResults from "./roi/ROIResults";
@@ -44,10 +42,6 @@ const ROICalculatorTab = () => {
   const [currentCosts, setCurrentCosts] = useState<number>(50000);
   const [aiCost] = useState<number>(2100);
 
-  const { toPDF } = usePDF();
-  const { toast } = useToast();
-  const resultRef = React.useRef<HTMLDivElement>(null);
-
   const calculateROI = () => {
     const totalEmployees = Object.values(departmentCounts).reduce(
       (sum, count) => sum + count,
@@ -71,24 +65,6 @@ const ROICalculatorTab = () => {
     { name: "3 Years", savings: roi.threeYears },
     { name: "5 Years", savings: roi.fiveYears },
   ];
-
-  const handleDownload = async () => {
-    try {
-      if (resultRef.current) {
-        await toPDF({ ref: resultRef });
-        toast({
-          title: "Success",
-          description: "ROI report downloaded successfully",
-        });
-      }
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to download ROI report",
-        variant: "destructive",
-      });
-    }
-  };
 
   const handleCurrencyChange = (value: string) => {
     const currency = currencies.find((c) => c.code === value)!;
@@ -165,13 +141,10 @@ const ROICalculatorTab = () => {
         </div>
       </Card>
 
-      <div ref={resultRef}>
-        <ROIResults
-          chartData={chartData}
-          selectedCurrency={selectedCurrency}
-          onDownload={handleDownload}
-        />
-      </div>
+      <ROIResults
+        chartData={chartData}
+        selectedCurrency={selectedCurrency}
+      />
     </div>
   );
 };

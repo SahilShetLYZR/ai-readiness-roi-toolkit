@@ -3,9 +3,7 @@ import CircularProgress from "./CircularProgress";
 import BenchmarkDisplay from "./BenchmarkDisplay";
 import { Industry } from "@/utils/industryWeights";
 import { Button } from "./ui/button";
-import { Download } from "lucide-react";
-import { usePDF } from "react-to-pdf";
-import { useToast } from "./ui/use-toast";
+import { ExternalLink } from "lucide-react";
 
 interface ScoreDisplayProps {
   score: number;
@@ -13,34 +11,9 @@ interface ScoreDisplayProps {
 }
 
 const ScoreDisplay = ({ score, industry }: ScoreDisplayProps) => {
-  const { toast } = useToast();
-  const resultRef = React.useRef<HTMLDivElement>(null);
-  const { toPDF } = usePDF();
-
-  const handleDownload = async () => {
-    try {
-      if (resultRef.current) {
-        await toPDF({ 
-          ref: resultRef.current,
-          filename: `ai-readiness-assessment-${industry?.toLowerCase()}.pdf`,
-        });
-        toast({
-          title: "Success",
-          description: "Your assessment results have been downloaded",
-        });
-      }
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to download assessment results",
-        variant: "destructive",
-      });
-    }
-  };
-
   return (
     <div className="space-y-6">
-      <div ref={resultRef}>
+      <div>
         <div className="flex flex-col items-center justify-center p-8 bg-gray-50 rounded-xl">
           <h3 className="text-xl font-semibold mb-4">Your Readiness Score</h3>
           <CircularProgress score={score} />
@@ -51,11 +24,11 @@ const ScoreDisplay = ({ score, industry }: ScoreDisplayProps) => {
 
       <div className="flex justify-center mt-6">
         <Button
-          onClick={handleDownload}
+          onClick={() => window.open("https://www.lyzr.ai/book-demo/", "_blank")}
           className="bg-lyzr-purple hover:bg-lyzr-purple/90 text-white"
         >
-          <Download className="w-4 h-4 mr-2" />
-          Download Results PDF
+          <ExternalLink className="w-4 h-4 mr-2" />
+          Book a Demo
         </Button>
       </div>
     </div>
