@@ -1,9 +1,10 @@
+import React from "react";
 import CircularProgress from "./CircularProgress";
 import BenchmarkDisplay from "./BenchmarkDisplay";
 import { Industry } from "@/utils/industryWeights";
 import { Button } from "./ui/button";
 import { Download } from "lucide-react";
-import { toPDF } from 'react-to-pdf';
+import { generatePDF } from "react-to-pdf";
 import { useToast } from "./ui/use-toast";
 
 interface ScoreDisplayProps {
@@ -17,7 +18,7 @@ const ScoreDisplay = ({ score, industry }: ScoreDisplayProps) => {
 
   const handleDownload = async () => {
     try {
-      await toPDF(resultRef, {
+      await generatePDF(resultRef, {
         filename: `ai-readiness-assessment-${industry?.toLowerCase()}.pdf`,
       });
       toast({
