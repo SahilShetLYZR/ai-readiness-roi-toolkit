@@ -13,7 +13,7 @@ const TabNavigation = ({ activeTab, onTabChange }: TabNavigationProps) => {
         className={cn(
           "px-6 py-3 rounded-lg font-semibold transition-all",
           activeTab === "assessment"
-            ? "bg-lyzr-purple text-white shadow-lg"
+            ? "bg-gradient-to-r from-violet-500 to-rose-500 text-white shadow-lg hover:opacity-90"
             : "bg-gray-100 text-gray-600 hover:bg-gray-200"
         )}
       >
@@ -24,7 +24,7 @@ const TabNavigation = ({ activeTab, onTabChange }: TabNavigationProps) => {
         className={cn(
           "px-6 py-3 rounded-lg font-semibold transition-all",
           activeTab === "roi"
-            ? "bg-lyzr-purple text-white shadow-lg"
+            ? "bg-gradient-to-r from-violet-500 to-rose-500 text-white shadow-lg hover:opacity-90"
             : "bg-gray-100 text-gray-600 hover:bg-gray-200"
         )}
       >
