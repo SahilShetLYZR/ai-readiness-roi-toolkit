@@ -22,24 +22,32 @@ interface ROIResultsProps {
 }
 
 const ROIResults = ({ chartData, selectedCurrency }: ROIResultsProps) => {
-  // Create table data with agent costs and savings
+  // Calculate AI operational costs based on estimated token usage and CPU costs
+  const calculateAICosts = (baseAmount: number, year: number) => {
+    const monthlyTokenCost = 0.002 * 1000000; // Estimated cost per million tokens
+    const monthlyCPUCost = 50; // Estimated CPU costs
+    const monthlyAICost = monthlyTokenCost + monthlyCPUCost;
+    return monthlyAICost * 12 * year;
+  };
+
+  // Create table data with human costs and AI costs
   const tableData = [
     {
-      category: "Agent-related Cost",
-      year1: chartData[0].savings * 0.8,
-      year3: chartData[1].savings * 0.8,
-      year5: chartData[2].savings * 0.8,
-      year7: chartData[2].savings * 0.85,
+      category: "Human Labor & Time Cost",
+      year1: chartData[0].savings * 0.9,
+      year3: chartData[1].savings * 0.9,
+      year5: chartData[2].savings * 0.9,
+      year7: chartData[2].savings * 0.95,
     },
     {
-      category: "Agentforce Investment*",
-      year1: 25200, // $2100 * 12
-      year3: 75600,
-      year5: 126000,
-      year7: 176400,
+      category: "AI Operational Costs*",
+      year1: calculateAICosts(chartData[0].savings, 1),
+      year3: calculateAICosts(chartData[1].savings, 3),
+      year5: calculateAICosts(chartData[2].savings, 5),
+      year7: calculateAICosts(chartData[2].savings, 7),
     },
     {
-      category: "Your Savings",
+      category: "Your Net Savings",
       year1: chartData[0].savings,
       year3: chartData[1].savings,
       year5: chartData[2].savings,
@@ -112,7 +120,7 @@ const ROIResults = ({ chartData, selectedCurrency }: ROIResultsProps) => {
         </div>
 
         <div className="text-sm text-gray-500 mt-4">
-          *Includes human costs and licensing costs for Agentforce.
+          *AI Operational Costs include estimated token usage and CPU costs for automated processes.
         </div>
 
         <div className="flex justify-center mt-6">
