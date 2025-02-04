@@ -83,11 +83,10 @@ const AssessmentTab = () => {
     const answeredQuestions = Object.keys(answers).length;
     const baseScore = (answeredQuestions / totalQuestions) * 100;
 
-    // Add complexity based on multi-select questions
     const multiSelectBonus = Object.entries(answers).reduce((acc, [id, selected]) => {
       const question = questions.find((q) => q.id === Number(id));
       if (question?.type === "multi" && selected.length > 1) {
-        return acc + 5; // Bonus points for selecting multiple options
+        return acc + 5;
       }
       return acc;
     }, 0);
@@ -115,6 +114,7 @@ const AssessmentTab = () => {
             type={q.type as "single" | "multi"}
             selected={answers[q.id] || []}
             onSelect={(selected) => handleAnswer(q.id, selected)}
+            questionNumber={q.id}
           />
         ))}
       </div>

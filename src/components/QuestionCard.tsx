@@ -6,6 +6,7 @@ interface QuestionCardProps {
   type: "single" | "multi";
   selected: string[];
   onSelect: (value: string[]) => void;
+  questionNumber: number;
 }
 
 const QuestionCard = ({
@@ -14,6 +15,7 @@ const QuestionCard = ({
   type,
   selected,
   onSelect,
+  questionNumber,
 }: QuestionCardProps) => {
   const handleSelect = (option: string) => {
     if (type === "single") {
@@ -28,7 +30,12 @@ const QuestionCard = ({
 
   return (
     <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 animate-fade-in">
-      <h3 className="text-lg font-semibold mb-4 text-lyzr-blue">{question}</h3>
+      <h3 className="text-lg font-semibold mb-4 text-lyzr-blue">
+        <span className="inline-block w-8 h-8 text-center leading-8 bg-lyzr-purple bg-opacity-10 rounded-full mr-3">
+          {questionNumber}
+        </span>
+        {question}
+      </h3>
       <div className="space-y-3">
         {options.map((option) => (
           <button
