@@ -5,13 +5,67 @@ import { Industry } from "@/utils/industryWeights";
 
 interface ScoreSummaryProps {
   score: number;
+  industry?: Industry;
 }
 
-const ScoreSummary = ({ score }: ScoreSummaryProps) => {
+const getAgentRecommendation = (industry?: Industry) => {
+  const agentMap = {
+    "Finance & Banking": {
+      title: "Dwight - AI RFP Scout",
+      url: "https://www.lyzr.ai/dwight-ai-rfp-scout/",
+      description: "Automate RFP discovery and processing"
+    },
+    "Healthcare": {
+      title: "Jeff - AI Support Agent",
+      url: "https://www.lyzr.ai/jeff/",
+      description: "AI-powered healthcare support automation"
+    },
+    "Retail & E-commerce": {
+      title: "Skott - AI Marketer",
+      url: "https://www.lyzr.ai/skott/",
+      description: "AI for retail campaign automation"
+    },
+    "Manufacturing & Supply Chain": {
+      title: "Kathy - AI Competitor Analyst",
+      url: "https://www.lyzr.ai/kathy/",
+      description: "AI-driven supply chain intelligence"
+    },
+    "Education": {
+      title: "Diane - AI HR Agent",
+      url: "https://www.lyzr.ai/diane/",
+      description: "AI for educational HR automation"
+    },
+    "Technology & Software": {
+      title: "Jazon - AI SDR",
+      url: "https://www.lyzr.ai/jazon/",
+      description: "AI-driven tech sales development"
+    },
+    "Government & Public Sector": {
+      title: "Dwight - AI RFP Scout",
+      url: "https://www.lyzr.ai/dwight-ai-rfp-scout/",
+      description: "Public sector RFP automation"
+    },
+    "Energy & Utilities": {
+      title: "Jeff - AI Support Agent",
+      url: "https://www.lyzr.ai/jeff/",
+      description: "Utility customer support automation"
+    },
+    "Telecommunications": {
+      title: "Jeff - AI Support Agent",
+      url: "https://www.lyzr.ai/jeff/",
+      description: "Telecom support automation"
+    }
+  };
+
+  if (!industry) return null;
+  return agentMap[industry];
+};
+
+const ScoreSummary = ({ score, industry }: ScoreSummaryProps) => {
   const getSummary = () => {
     if (score >= 80) {
       return {
-        assessment: "Your AI readiness score places you among the top leaders in your industry! To maximize your advantage, explore advanced AI architectures and research projects that push the boundaries of AI-driven automation and intelligence.",
+        assessment: "Your AI readiness score places you among the top leaders in your industry! To maximize your advantage, explore advanced AI architectures, research projects, and multi-agent AI models.",
         suggestion: "Let's explore how Lyzr can take your AI transformation further!",
         resources: [
           {
@@ -25,14 +79,19 @@ const ScoreSummary = ({ score }: ScoreSummaryProps) => {
             description: "Learn about Mixture of Expert Agents"
           },
           {
-            title: "AI Risk Mitigation & Security",
+            title: "Enterprise AI Adoption",
+            url: "https://www.lyzr.ai/enterprise/",
+            description: "Organizational General Intelligence"
+          },
+          {
+            title: "AI Risk & Security",
             url: "https://www.researchgate.net/publication/388554578_AgentDefender_by_Lyzr_A_Benchmark_Evaluation_and_Neural_Embedding_Approach_for_Agent_Prompt_Injection/",
             description: "Read AgentDefender Research"
           },
           {
-            title: "Enterprise AI Adoption",
+            title: "Research Projects",
             url: "https://www.lyzr.ai/research-projects/",
-            description: "View Lyzr Research Projects"
+            description: "Explore Lyzr Research Projects"
           }
         ]
       };
@@ -42,9 +101,14 @@ const ScoreSummary = ({ score }: ScoreSummaryProps) => {
         suggestion: "See how companies like yours are scaling AI adoption.",
         resources: [
           {
-            title: "Enterprise AI Frameworks",
+            title: "AI SaaS Adoption",
+            url: "https://www.lyzr.ai/pricing/",
+            description: "Explore Lyzr Pricing Options"
+          },
+          {
+            title: "Enterprise AI Framework",
             url: "https://www.youtube.com/watch?v=SiRwqf6pPU0",
-            description: "Learn about Enterprise-Grade Generative AI Stack"
+            description: "Learn about Enterprise-Grade GenAI Stack"
           },
           {
             title: "Pre-Built AI Solutions",
@@ -52,9 +116,14 @@ const ScoreSummary = ({ score }: ScoreSummaryProps) => {
             description: "Explore Lyzr App Store"
           },
           {
-            title: "AI Automation Use Cases",
-            url: "https://www.lyzr.ai/webinars/",
-            description: "Watch Lyzr Webinars"
+            title: "AI Security & Governance",
+            url: "https://studio.lyzr.ai/responsible-ai/",
+            description: "Explore Responsible AI Demos"
+          },
+          {
+            title: "AWS Partnership",
+            url: "https://www.lyzr.ai/partnership/aws/",
+            description: "Learn about AWS Integration"
           }
         ]
       };
@@ -77,6 +146,11 @@ const ScoreSummary = ({ score }: ScoreSummaryProps) => {
             title: "Intro to AI Agents",
             url: "https://www.youtube.com/watch?v=ImXlHRPWQcQ",
             description: "Learn about Lyzr Agent Framework"
+          },
+          {
+            title: "Common AI Challenges",
+            url: "https://www.lyzr.ai/blog/",
+            description: "Explore Lyzr Blog"
           }
         ]
       };
@@ -84,6 +158,7 @@ const ScoreSummary = ({ score }: ScoreSummaryProps) => {
   };
 
   const summary = getSummary();
+  const recommendedAgent = getAgentRecommendation(industry);
 
   return (
     <div className="space-y-6">
@@ -100,9 +175,9 @@ const ScoreSummary = ({ score }: ScoreSummaryProps) => {
           </Button>
           <Button
             variant="outline"
-            onClick={() => window.open("https://www.lyzr.ai/app-store/", "_blank")}
+            onClick={() => window.open("https://studio.lyzr.ai/responsible-ai/", "_blank")}
           >
-            Explore App Store
+            Explore Responsible AI
           </Button>
         </div>
       </div>
@@ -125,9 +200,25 @@ const ScoreSummary = ({ score }: ScoreSummaryProps) => {
           ))}
         </div>
       </div>
+
+      {recommendedAgent && (
+        <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <h4 className="font-medium text-gray-900 mb-4">Recommended AI Agent for Your Industry</h4>
+          <div className="p-3 bg-white rounded border border-gray-100 hover:border-lyzr-purple transition-colors">
+            <a 
+              href={recommendedAgent.url} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block"
+            >
+              <h5 className="text-sm font-medium text-gray-900 mb-1">{recommendedAgent.title}</h5>
+              <p className="text-sm text-gray-600">{recommendedAgent.description}</p>
+            </a>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 export default ScoreSummary;
-
