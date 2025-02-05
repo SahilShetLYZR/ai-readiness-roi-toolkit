@@ -1,6 +1,7 @@
 import React from "react";
 import CircularProgress from "./CircularProgress";
 import BenchmarkDisplay from "./BenchmarkDisplay";
+import ScoreBreakdown from "./ScoreBreakdown";
 import { Industry } from "@/utils/industryWeights";
 import { Button } from "./ui/button";
 import { ExternalLink } from "lucide-react";
@@ -8,9 +9,10 @@ import { ExternalLink } from "lucide-react";
 interface ScoreDisplayProps {
   score: number;
   industry?: Industry;
+  answers: Record<number, string[]>;
 }
 
-const ScoreDisplay = ({ score, industry }: ScoreDisplayProps) => {
+const ScoreDisplay = ({ score, industry, answers }: ScoreDisplayProps) => {
   return (
     <div className="space-y-6">
       <div>
@@ -20,6 +22,14 @@ const ScoreDisplay = ({ score, industry }: ScoreDisplayProps) => {
         </div>
         
         {industry && <BenchmarkDisplay score={score} industry={industry} />}
+        
+        {industry && answers && (
+          <ScoreBreakdown 
+            score={score} 
+            industry={industry} 
+            answers={answers}
+          />
+        )}
       </div>
 
       <div className="flex justify-center mt-6">

@@ -79,6 +79,7 @@ const AssessmentTab = () => {
         <ScoreDisplay 
           score={calculateScore(answers, selectedIndustry as Industry)} 
           industry={selectedIndustry as Industry}
+          answers={answers}
         />
       )}
     </div>
