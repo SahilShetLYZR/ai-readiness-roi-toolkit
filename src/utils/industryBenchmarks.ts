@@ -50,42 +50,104 @@ export const industryBenchmarks: Record<string, {
   }
 };
 
-export const getReadinessLevel = (score: number, industry: string) => {
+interface ReadinessLevel {
+  level: string;
+  color: string;
+  message: string;
+  recommendations: string[];
+  cta: {
+    primary: string;
+    secondary?: string;
+  };
+}
+
+const getWeakAreas = (answers: Record<number, string[]>): string[] => {
+  const weakAreas = [];
+  
+  // Check AI Capabilities (Question 2)
+  if (!answers[2] || answers[2].length < 2) {
+    weakAreas.push("ai-capabilities");
+  }
+  
+  // Check Data Challenges (Question 4)
+  if (!answers[4] || answers[4].length < 2) {
+    weakAreas.push("data-quality");
+  }
+  
+  // Check Governance (Questions 7 & 8)
+  if ((!answers[7] || answers[7][0]?.includes("No")) && 
+      (!answers[8] || answers[8][0]?.includes("No"))) {
+    weakAreas.push("governance");
+  }
+  
+  return weakAreas;
+};
+
+const getSpecificRecommendations = (weakAreas: string[]): string[] => {
+  const recommendations: string[] = [];
+  
+  if (weakAreas.includes("ai-capabilities")) {
+    recommendations.push("Join our free 30-minute webinar on AI adoption best practices");
+  }
+  
+  if (weakAreas.includes("data-quality")) {
+    recommendations.push("Schedule a free data audit with a Lyzr expert");
+  }
+  
+  if (weakAreas.includes("governance")) {
+    recommendations.push("Implement a basic AI governance framework using our starter template");
+  }
+  
+  return recommendations;
+};
+
+export const getReadinessLevel = (score: number, industry: string): ReadinessLevel | null => {
   const benchmark = industryBenchmarks[industry];
   if (!benchmark) return null;
 
-  if (score >= benchmark.bestInClass.min) {
+  if (score >= 80) {
     return {
-      level: "Best-in-Class",
+      level: "Best-in-Class AI Leader",
       color: "green",
-      message: "You are ahead of your industry in AI readiness!",
+      message: "You're ahead of your industry in AI adoption! To maximize your ROI, consider scaling automation and AI-driven workflows across all business functions.",
       recommendations: [
-        "Expand into Agentic AI",
-        "Implement AI-driven business process automation",
-        "Lead industry innovation with advanced AI solutions"
-      ]
+        "Expand into Agentic AI-driven automation",
+        "Implement real-time AI decision systems",
+        "Explore predictive analytics & AI-driven customer insights"
+      ],
+      cta: {
+        primary: "Book a Strategy Session",
+        secondary: "Download AI Leadership Whitepaper"
+      }
     };
-  } else if (score >= benchmark.average.min) {
+  } else if (score >= 50) {
     return {
-      level: "Industry Average",
+      level: "Developing AI Maturity",
       color: "yellow",
-      message: "You are aligned with industry trends, but there's room to improve.",
+      message: "You're on the right track! Your AI adoption is aligned with industry trends, but further improvements in AI governance, automation, and data management will drive better ROI.",
       recommendations: [
-        "Enhance AI governance",
-        "Improve data automation",
-        "Strengthen analytics capabilities"
-      ]
+        "Strengthen AI governance & security frameworks",
+        "Optimize data pipelines for better AI accuracy",
+        "Expand AI adoption into new business functions"
+      ],
+      cta: {
+        primary: "Book a Consultation",
+        secondary: "Read Success Stories"
+      }
     };
   } else {
     return {
-      level: "Lagging AI Adoption",
+      level: "AI Beginner - High Risk",
       color: "red",
-      message: "Your AI readiness is below industry standards.",
+      message: "Your AI readiness is below industry standards, but the good news is you can improve quickly! Businesses like NTT Data transformed their AI strategy in weeks with the right foundation.",
       recommendations: [
-        "Start with low-risk AI pilots",
-        "Invest in AI training",
-        "Improve data quality"
-      ]
+        "Conduct a data audit to assess AI readiness",
+        "Implement a basic AI governance framework",
+        "Start with small AI automation use cases"
+      ],
+      cta: {
+        primary: "Book a Free AI Readiness Consultation"
+      }
     };
   }
 };

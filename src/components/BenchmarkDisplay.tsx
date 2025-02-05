@@ -1,6 +1,8 @@
 import { Progress } from "@/components/ui/progress";
 import { Industry } from "@/utils/industryWeights";
 import { industryBenchmarks, getReadinessLevel } from "@/utils/industryBenchmarks";
+import { Button } from "./ui/button";
+import { ExternalLink } from "lucide-react";
 
 interface BenchmarkDisplayProps {
   score: number;
@@ -56,17 +58,36 @@ const BenchmarkDisplay = ({ score, industry }: BenchmarkDisplayProps) => {
           readinessLevel.color === "yellow" ? "bg-yellow-50" :
           "bg-red-50"
         }`}>
-          <p className="text-sm mb-2">
-            <span className="font-medium">Performance: </span>
-            {readinessLevel.message}
-          </p>
+          <h4 className="font-semibold mb-2">{readinessLevel.level}</h4>
+          <p className="text-sm mb-4">{readinessLevel.message}</p>
+          
           <div className="mt-3">
-            <p className="text-sm font-medium mb-2">Recommendations:</p>
+            <p className="text-sm font-medium mb-2">Recommended Next Steps:</p>
             <ul className="list-disc pl-5 text-sm space-y-1">
               {readinessLevel.recommendations.map((rec, index) => (
                 <li key={index}>{rec}</li>
               ))}
             </ul>
+          </div>
+
+          <div className="mt-6 space-y-3">
+            <Button
+              onClick={() => window.open("https://www.lyzr.ai/book-demo/", "_blank")}
+              className="w-full bg-gradient-to-r from-violet-500 to-rose-500 hover:opacity-90 text-white"
+            >
+              <ExternalLink className="w-4 h-4 mr-2" />
+              {readinessLevel.cta.primary}
+            </Button>
+            
+            {readinessLevel.cta.secondary && (
+              <Button
+                onClick={() => window.open("https://www.lyzr.ai/resources/", "_blank")}
+                variant="outline"
+                className="w-full"
+              >
+                {readinessLevel.cta.secondary}
+              </Button>
+            )}
           </div>
         </div>
       </div>
