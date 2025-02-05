@@ -4,7 +4,16 @@ import AssessmentTab from "@/components/AssessmentTab";
 const Index = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto relative">
+        {/* Lyzr Logo */}
+        <div className="absolute top-0 right-0">
+          <img 
+            src="/lyzr-logo.svg" 
+            alt="Lyzr Logo" 
+            className="h-12 w-auto"
+          />
+        </div>
+
         <div className="mb-12">
           <div className="text-center">
             <h1 className="text-4xl font-bold text-lyzr-blue">
