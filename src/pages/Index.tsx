@@ -8,7 +8,7 @@ const Index = () => {
           <img 
             src="https://i0.wp.com/www.lyzr.ai/wp-content/uploads/2024/11/cropped_lyzr_logo_1.webp?fit=452%2C180&ssl=1" 
             alt="Lyzr Logo" 
-            className="h-16 w-auto"
+            className="h-12 w-auto"
           />
           <div className="text-center flex-grow">
             <h1 className="text-4xl font-bold text-lyzr-blue">
@@ -22,25 +22,24 @@ const Index = () => {
               </p>
               <ul className="text-left space-y-2 mb-6">
                 <li className="flex items-start">
-                  <span className="text-green-500 mr-2">✅</span>
+                  <span className="mr-2">•</span>
                   <span>Identify key strengths & weaknesses in AI adoption</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-green-500 mr-2">✅</span>
+                  <span className="mr-2">•</span>
                   <span>Receive prescriptive guidance on how to accelerate AI transformation</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-green-500 mr-2">✅</span>
+                  <span className="mr-2">•</span>
                   <span>Benchmark their AI readiness against industry peers</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-green-500 mr-2">✅</span>
+                  <span className="mr-2">•</span>
                   <span>Get tailored recommendations to maximize ROI from AI investments</span>
                 </li>
               </ul>
               <p className="text-sm italic">
-                The insights generated from this assessment will also help the Lyzr demo team personalize their discussion, 
-                ensuring they focus on the most relevant AI solutions based on your organization's needs.
+                Please select your Industry from the drop-down below for benchmarking
               </p>
             </div>
           </div>
