@@ -1,5 +1,6 @@
 import { Industry, getIndustryWeights } from "./industryWeights";
 import { Question } from "@/types/assessment";
+import { questions } from "@/data/assessmentQuestions";
 
 export const getQuestionScore = (
   questionId: number, 
