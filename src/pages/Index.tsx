@@ -22,19 +22,19 @@ const Index = () => {
               </p>
               <ul className="text-left space-y-2 mb-6">
                 <li className="flex items-start">
-                  <span className="mr-2">•</span>
+                  <span className="mr-2 text-xs">•</span>
                   <span>Identify key strengths & weaknesses in AI adoption</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-2">•</span>
+                  <span className="mr-2 text-xs">•</span>
                   <span>Receive prescriptive guidance on how to accelerate AI transformation</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-2">•</span>
+                  <span className="mr-2 text-xs">•</span>
                   <span>Benchmark their AI readiness against industry peers</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-2">•</span>
+                  <span className="mr-2 text-xs">•</span>
                   <span>Get tailored recommendations to maximize ROI from AI investments</span>
                 </li>
               </ul>
