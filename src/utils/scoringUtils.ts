@@ -33,18 +33,14 @@ const calculateReadinessScore = (answers: Record<number, string[]>): number => {
 };
 
 const calculateGovernanceScore = (answers: Record<number, string[]>): number => {
-  const governanceQuestions = questions.filter(q => q.id >= 7 && q.id <= 8);
+  const governanceQuestions = questions.filter(q => q.id === 7);
   let totalScore = 0;
   const maxScore = 15;
 
   governanceQuestions.forEach(question => {
-    if (answers[question.id]) {
-      // Governance questions are single-select
+    if (answers[question.id] && question.weights) {
       const answer = answers[question.id][0];
-      const score = answer?.includes("comprehensive") ? 15 :
-                   answer?.includes("partial") ? 10 :
-                   answer?.includes("development") ? 5 : 0;
-      totalScore += score;
+      totalScore += question.weights[answer] || 0;
     }
   });
 
@@ -52,17 +48,13 @@ const calculateGovernanceScore = (answers: Record<number, string[]>): number => 
 };
 
 const calculateBarriersImpact = (answers: Record<number, string[]>): number => {
-  const barrierQuestions = questions.filter(q => q.id >= 9);
+  const barrierQuestions = questions.filter(q => q.id === 8);
   let totalDeduction = 0;
   const maxDeduction = -20;
 
   barrierQuestions.forEach(question => {
-    if (answers[question.id]) {
-      const answer = answers[question.id][0];
-      const deduction = answer?.includes("No") ? -10 :
-                       answer?.includes("Planning") ? -5 :
-                       answer?.includes("Pilot") ? -2 : 0;
-      totalDeduction += deduction;
+    if (answers[question.id] && question.weights) {
+      totalDeduction += calculateWeightedScore(answers[question.id], question.weights);
     }
   });
 
@@ -81,7 +73,8 @@ export const calculateScore = (
   let finalScore = strategyScore + readinessScore + governanceScore + barriersImpact;
   
   // Normalize to 0-99 scale
-  finalScore = Math.round((finalScore / 85) * 99);
+  const maxPossibleScore = 100; // Total possible points across all sections
+  finalScore = Math.round((finalScore / maxPossibleScore) * 99);
   finalScore = Math.max(0, Math.min(99, finalScore));
 
   if (!industry) return finalScore;
@@ -93,7 +86,7 @@ export const calculateScore = (
   if (answers[4]?.length > 0) { // Data challenges
     finalScore *= weights.dataWeight;
   }
-  if (answers[7] || answers[8]) { // Governance
+  if (answers[7]) { // Governance
     finalScore *= weights.governanceWeight;
   }
   if (answers[2]?.length > 0) { // AI capabilities
@@ -102,7 +95,7 @@ export const calculateScore = (
   if (answers[6]) { // Automation
     finalScore *= weights.automationWeight;
   }
-  if (answers[8]) { // Responsible AI
+  if (answers[8]?.length > 0) { // Barriers
     finalScore *= weights.responsibleAIWeight;
   }
 
