@@ -1,18 +1,18 @@
 import { Industry, getIndustryWeights } from "./industryWeights";
+import { questions } from "@/data/assessmentQuestions";
 
 const calculateWeightedScore = (answers: string[], weights: Record<string, number>): number => {
   return answers.reduce((score, answer) => score + (weights[answer] || 0), 0);
 };
 
 const calculateStrategyScore = (answers: Record<number, string[]>): number => {
-  const questions = [1, 2, 3];
+  const strategyQuestions = questions.filter(q => q.id <= 3);
   let totalScore = 0;
   const maxScore = 40; // Maximum points for strategy section
 
-  questions.forEach(questionId => {
-    if (answers[questionId]) {
-      const questionWeights = questions.find(q => q.id === questionId)?.weights || {};
-      totalScore += calculateWeightedScore(answers[questionId], questionWeights);
+  strategyQuestions.forEach(question => {
+    if (answers[question.id] && question.weights) {
+      totalScore += calculateWeightedScore(answers[question.id], question.weights);
     }
   });
 
@@ -20,13 +20,12 @@ const calculateStrategyScore = (answers: Record<number, string[]>): number => {
 };
 
 const calculateReadinessScore = (answers: Record<number, string[]>): number => {
-  const questions = [4, 5, 6];
+  const readinessQuestions = questions.filter(q => q.id >= 4 && q.id <= 6);
   let totalScore = 30; // Start with max score and subtract based on challenges
   
-  questions.forEach(questionId => {
-    if (answers[questionId]) {
-      const questionWeights = questions.find(q => q.id === questionId)?.weights || {};
-      totalScore += calculateWeightedScore(answers[questionId], questionWeights);
+  readinessQuestions.forEach(question => {
+    if (answers[question.id] && question.weights) {
+      totalScore += calculateWeightedScore(answers[question.id], question.weights);
     }
   });
 
@@ -34,14 +33,14 @@ const calculateReadinessScore = (answers: Record<number, string[]>): number => {
 };
 
 const calculateGovernanceScore = (answers: Record<number, string[]>): number => {
-  const questions = [7, 8];
+  const governanceQuestions = questions.filter(q => q.id >= 7 && q.id <= 8);
   let totalScore = 0;
   const maxScore = 15;
 
-  questions.forEach(questionId => {
-    if (answers[questionId]) {
+  governanceQuestions.forEach(question => {
+    if (answers[question.id]) {
       // Governance questions are single-select
-      const answer = answers[questionId][0];
+      const answer = answers[question.id][0];
       const score = answer?.includes("comprehensive") ? 15 :
                    answer?.includes("partial") ? 10 :
                    answer?.includes("development") ? 5 : 0;
@@ -53,13 +52,13 @@ const calculateGovernanceScore = (answers: Record<number, string[]>): number => 
 };
 
 const calculateBarriersImpact = (answers: Record<number, string[]>): number => {
-  const questions = [9, 10];
+  const barrierQuestions = questions.filter(q => q.id >= 9);
   let totalDeduction = 0;
   const maxDeduction = -20;
 
-  questions.forEach(questionId => {
-    if (answers[questionId]) {
-      const answer = answers[questionId][0];
+  barrierQuestions.forEach(question => {
+    if (answers[question.id]) {
+      const answer = answers[question.id][0];
       const deduction = answer?.includes("No") ? -10 :
                        answer?.includes("Planning") ? -5 :
                        answer?.includes("Pilot") ? -2 : 0;
