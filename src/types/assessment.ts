@@ -3,4 +3,5 @@ export interface Question {
   question: string;
   type: "single" | "multi";
   options: string[];
+  weights?: Record<string, number>;
 }

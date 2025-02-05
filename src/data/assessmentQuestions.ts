@@ -9,9 +9,16 @@ export const questions: Question[] = [
       "Increase operational efficiency",
       "Reduce costs",
       "Improve customer experience",
-      "Drive innovation",
-      "Enhance decision making",
+      "Drive innovation & create new business models",
+      "Enable data-driven decision-making at scale",
     ],
+    weights: {
+      "Increase operational efficiency": 5,
+      "Reduce costs": 5,
+      "Improve customer experience": 10,
+      "Drive innovation & create new business models": 20,
+      "Enable data-driven decision-making at scale": 20,
+    }
   },
   {
     id: 2,
@@ -19,35 +26,58 @@ export const questions: Question[] = [
     type: "multi",
     options: [
       "Process automation",
-      "Predictive analytics",
-      "Natural language processing",
-      "Computer vision",
-      "Recommendation systems",
+      "Predictive analytics for forecasting & optimization",
+      "Natural language processing (NLP) for customer & employee engagement",
+      "Computer vision & image recognition",
+      "AI-driven decision support systems",
+      "AI-driven risk & security analytics",
     ],
+    weights: {
+      "Process automation": 10,
+      "Predictive analytics for forecasting & optimization": 15,
+      "Natural language processing (NLP) for customer & employee engagement": 10,
+      "Computer vision & image recognition": 10,
+      "AI-driven decision support systems": 15,
+      "AI-driven risk & security analytics": 15,
+    }
   },
   {
     id: 3,
     question: "How do you measure the success of AI in your organization?",
     type: "multi",
     options: [
-      "Cost savings",
-      "Productivity metrics",
-      "Customer satisfaction",
-      "Revenue growth",
-      "Employee satisfaction",
+      "Cost savings & operational efficiency improvements",
+      "Productivity gains (reduced time spent on tasks, automation rates)",
+      "Customer experience & engagement improvements",
+      "AI adoption rate & automation impact",
+      "Revenue growth driven by AI solutions",
     ],
+    weights: {
+      "Cost savings & operational efficiency improvements": 10,
+      "Productivity gains (reduced time spent on tasks, automation rates)": 10,
+      "Customer experience & engagement improvements": 10,
+      "AI adoption rate & automation impact": 15,
+      "Revenue growth driven by AI solutions": 15,
+    }
   },
   {
     id: 4,
     question: "What challenges do you face with your data?",
     type: "multi",
     options: [
-      "Volume – We have too much data and need an AI solution to process it efficiently",
-      "Variety – We need to process data from multiple sources (PDFs, Word docs, images, etc.)",
-      "Velocity – Our data is generated too fast for us to analyze in real-time",
-      "Veracity – Our data isn't always accurate or trustworthy, making AI insights unreliable",
-      "Value – We struggle to extract useful business insights from our data",
+      "Volume – AI needed to process large datasets efficiently",
+      "Variety – AI needed for multi-source data processing",
+      "Velocity – AI required for real-time analytics",
+      "Veracity – Data accuracy concerns hinder AI adoption",
+      "Value – Struggling to extract insights from data",
     ],
+    weights: {
+      "Volume – AI needed to process large datasets efficiently": -5,
+      "Variety – AI needed for multi-source data processing": -3,
+      "Velocity – AI required for real-time analytics": -3,
+      "Veracity – Data accuracy concerns hinder AI adoption": -5,
+      "Value – Struggling to extract insights from data": -5,
+    }
   },
   {
     id: 5,
@@ -56,10 +86,17 @@ export const questions: Question[] = [
     options: [
       "Technical complexity",
       "Data quality issues",
-      "Lack of expertise",
+      "Lack of AI expertise & skills",
       "Budget constraints",
-      "Change management",
+      "Cultural resistance to AI adoption",
     ],
+    weights: {
+      "Technical complexity": -5,
+      "Data quality issues": -5,
+      "Lack of AI expertise & skills": -5,
+      "Budget constraints": -3,
+      "Cultural resistance to AI adoption": -3,
+    }
   },
   {
     id: 6,
