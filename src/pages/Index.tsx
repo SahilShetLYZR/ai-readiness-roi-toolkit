@@ -15,24 +15,12 @@ const Index = () => {
                 data infrastructure, and ability to adopt AI-driven solutions. By answering the questions below, 
                 organizations will:
               </p>
-              <ul className="text-left space-y-4 mb-6 pl-4">
-                <li className="flex items-start">
-                  <span className="mr-2 text-xs mt-1.5">•</span>
-                  <span className="text-base">Identify key strengths & weaknesses in AI adoption</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-xs mt-1.5">•</span>
-                  <span className="text-base">Receive prescriptive guidance on how to accelerate AI transformation</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-xs mt-1.5">•</span>
-                  <span className="text-base">Benchmark their AI readiness against industry peers</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-xs mt-1.5">•</span>
-                  <span className="text-base">Get tailored recommendations to maximize ROI from AI investments</span>
-                </li>
-              </ul>
+              <div className="text-left space-y-4 mb-6">
+                <p className="text-base">Identify key strengths & weaknesses in AI adoption</p>
+                <p className="text-base">Receive prescriptive guidance on how to accelerate AI transformation</p>
+                <p className="text-base">Benchmark their AI readiness against industry peers</p>
+                <p className="text-base">Get tailored recommendations to maximize ROI from AI investments</p>
+              </div>
               <p className="text-sm italic">
                 Please select your Industry from the drop-down below for benchmarking
               </p>
