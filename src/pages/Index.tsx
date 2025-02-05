@@ -12,11 +12,37 @@ const Index = () => {
           />
           <div className="text-center flex-grow">
             <h1 className="text-4xl font-bold text-lyzr-blue">
-              Lyzr AI Readiness Assessment
+              AI Readiness Assessment
             </h1>
-            <p className="text-lg text-gray-600 mt-4">
-              Evaluate your organization's AI readiness
-            </p>
+            <div className="text-lg text-gray-600 mt-6 max-w-3xl mx-auto">
+              <p className="mb-6">
+                The AI Readiness Assessment is designed to help businesses evaluate their current AI maturity, 
+                data infrastructure, and ability to adopt AI-driven solutions. By answering the questions below, 
+                organizations will:
+              </p>
+              <ul className="text-left space-y-2 mb-6">
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2">✅</span>
+                  <span>Identify key strengths & weaknesses in AI adoption</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2">✅</span>
+                  <span>Receive prescriptive guidance on how to accelerate AI transformation</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2">✅</span>
+                  <span>Benchmark their AI readiness against industry peers</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2">✅</span>
+                  <span>Get tailored recommendations to maximize ROI from AI investments</span>
+                </li>
+              </ul>
+              <p className="text-sm italic">
+                The insights generated from this assessment will also help the Lyzr demo team personalize their discussion, 
+                ensuring they focus on the most relevant AI solutions based on your organization's needs.
+              </p>
+            </div>
           </div>
           <div className="w-[100px]"></div>
         </div>
