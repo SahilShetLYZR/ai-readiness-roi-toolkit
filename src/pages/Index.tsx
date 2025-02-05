@@ -1,11 +1,6 @@
-import { useState } from "react";
-import TabNavigation from "@/components/TabNavigation";
 import AssessmentTab from "@/components/AssessmentTab";
-import ROICalculatorTab from "@/components/ROICalculatorTab";
 
 const Index = () => {
-  const [activeTab, setActiveTab] = useState<"assessment" | "roi">("assessment");
-
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
@@ -17,19 +12,17 @@ const Index = () => {
           />
           <div className="text-center flex-grow">
             <h1 className="text-4xl font-bold text-lyzr-blue">
-              Lyzr AI Readiness & ROI Calculator
+              Lyzr AI Readiness Assessment
             </h1>
             <p className="text-lg text-gray-600 mt-4">
-              Evaluate your organization's AI readiness and calculate potential ROI
+              Evaluate your organization's AI readiness
             </p>
           </div>
-          <div className="w-[100px]"></div> {/* This creates balance with the logo */}
+          <div className="w-[100px]"></div>
         </div>
 
-        <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
-
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-          {activeTab === "assessment" ? <AssessmentTab /> : <ROICalculatorTab />}
+          <AssessmentTab />
         </div>
       </div>
     </div>
