@@ -1,5 +1,39 @@
 import { Industry, getIndustryWeights } from "./industryWeights";
-import { questions } from "@/data/assessmentQuestions";
+import { Question } from "@/types/assessment";
+
+export const getQuestionScore = (
+  questionId: number, 
+  questions: Question[], 
+  answers: Record<number, string[]>
+): number => {
+  const question = questions.find(q => q.id === questionId);
+  if (!question?.weights || !answers[questionId]) return 0;
+  
+  return answers[questionId].reduce((total, answer) => 
+    total + (question.weights?.[answer] || 0), 0
+  );
+};
+
+export const getQuestionImpact = (
+  questionId: number,
+  questions: Question[],
+  answers: Record<number, string[]>
+): "positive" | "negative" | "neutral" => {
+  const score = getQuestionScore(questionId, questions, answers);
+  if (score > 0) return "positive";
+  if (score < 0) return "negative";
+  return "neutral";
+};
+
+export const getSectionScore = (
+  startId: number, 
+  endId: number,
+  questions: Question[],
+  answers: Record<number, string[]>
+): number => {
+  return Array.from({ length: endId - startId + 1 }, (_, i) => startId + i)
+    .reduce((total, id) => total + getQuestionScore(id, questions, answers), 0);
+};
 
 const calculateWeightedScore = (answers: string[], weights: Record<string, number>): number => {
   return answers.reduce((score, answer) => score + (weights[answer] || 0), 0);
