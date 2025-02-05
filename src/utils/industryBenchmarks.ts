@@ -87,15 +87,15 @@ const getSpecificRecommendations = (weakAreas: string[]): string[] => {
   const recommendations: string[] = [];
   
   if (weakAreas.includes("ai-capabilities")) {
-    recommendations.push("Join our free 30-minute webinar on AI adoption best practices");
+    recommendations.push("Learn how SurePeople transformed their talent assessment process with AI in just weeks");
   }
   
   if (weakAreas.includes("data-quality")) {
-    recommendations.push("Schedule a free data audit with a Lyzr expert");
+    recommendations.push("See how NTT Data built a Risk Assessment AI Agent using structured data pipelines");
   }
   
   if (weakAreas.includes("governance")) {
-    recommendations.push("Implement a basic AI governance framework using our starter template");
+    recommendations.push("Discover NTT Data's approach to AI governance and compliance using HybridFlow");
   }
   
   return recommendations;
@@ -139,11 +139,11 @@ export const getReadinessLevel = (score: number, industry: string): ReadinessLev
     return {
       level: "AI Beginner - High Risk",
       color: "red",
-      message: "Your AI readiness is below industry standards, but the good news is you can improve quickly! Businesses like NTT Data transformed their AI strategy in weeks with the right foundation.",
+      message: "Your AI readiness is below industry standards, but the good news is you can improve quickly! Companies like SurePeople and NTT Data transformed their AI strategy in weeks with the right foundation.",
       recommendations: [
-        "Conduct a data audit to assess AI readiness",
-        "Implement a basic AI governance framework",
-        "Start with small AI automation use cases"
+        "See how SurePeople automated talent assessment with AI in weeks",
+        "Learn from NTT Data's success in building a Risk Assessment AI Agent",
+        "Start with proven AI use cases from our customer success stories"
       ],
       cta: {
         primary: "Book a Free AI Readiness Consultation"
