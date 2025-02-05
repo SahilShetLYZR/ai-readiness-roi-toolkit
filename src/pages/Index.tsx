@@ -13,15 +13,8 @@ const Index = () => {
             <div className="text-lg text-gray-600 mt-6 max-w-3xl mx-auto">
               <p className="mb-6 text-base leading-relaxed">
                 The AI Readiness Assessment is designed to help businesses evaluate their current AI maturity, 
-                data infrastructure, and ability to adopt AI-driven solutions. By answering the questions below, 
-                organizations will:
+                data infrastructure, and ability to adopt AI-driven solutions.
               </p>
-              <div className="text-left space-y-4 mb-6">
-                <p className="text-base">Identify key strengths & weaknesses in AI adoption</p>
-                <p className="text-base">Receive prescriptive guidance on how to accelerate AI transformation</p>
-                <p className="text-base">Benchmark their AI readiness against industry peers</p>
-                <p className="text-base">Get tailored recommendations to maximize ROI from AI investments</p>
-              </div>
               <p className="text-sm italic">
                 Please select your Industry from the drop-down below for benchmarking
               </p>
