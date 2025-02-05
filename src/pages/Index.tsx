@@ -8,7 +8,7 @@ const Index = () => {
         {/* Lyzr Logo */}
         <div className="absolute top-0 right-0">
           <img 
-            src="/lyzr-logo.svg" 
+            src="https://www.lyzr.ai/wp-content/uploads/2023/11/cropped-Lyzr-Logo-1.png" 
             alt="Lyzr Logo" 
             className="h-12 w-auto"
           />
