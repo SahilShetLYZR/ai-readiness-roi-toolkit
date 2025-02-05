@@ -15,27 +15,27 @@ const Index = () => {
               AI Readiness Assessment
             </h1>
             <div className="text-lg text-gray-600 mt-6 max-w-3xl mx-auto">
-              <p className="mb-6">
+              <p className="mb-6 text-base leading-relaxed">
                 The AI Readiness Assessment is designed to help businesses evaluate their current AI maturity, 
                 data infrastructure, and ability to adopt AI-driven solutions. By answering the questions below, 
                 organizations will:
               </p>
-              <ul className="text-left space-y-2 mb-6">
+              <ul className="text-left space-y-4 mb-6 pl-4">
                 <li className="flex items-start">
-                  <span className="mr-2 text-xs">•</span>
-                  <span>Identify key strengths & weaknesses in AI adoption</span>
+                  <span className="mr-2 text-xs mt-1.5">•</span>
+                  <span className="text-base">Identify key strengths & weaknesses in AI adoption</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-2 text-xs">•</span>
-                  <span>Receive prescriptive guidance on how to accelerate AI transformation</span>
+                  <span className="mr-2 text-xs mt-1.5">•</span>
+                  <span className="text-base">Receive prescriptive guidance on how to accelerate AI transformation</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-2 text-xs">•</span>
-                  <span>Benchmark their AI readiness against industry peers</span>
+                  <span className="mr-2 text-xs mt-1.5">•</span>
+                  <span className="text-base">Benchmark their AI readiness against industry peers</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-2 text-xs">•</span>
-                  <span>Get tailored recommendations to maximize ROI from AI investments</span>
+                  <span className="mr-2 text-xs mt-1.5">•</span>
+                  <span className="text-base">Get tailored recommendations to maximize ROI from AI investments</span>
                 </li>
               </ul>
               <p className="text-sm italic">
