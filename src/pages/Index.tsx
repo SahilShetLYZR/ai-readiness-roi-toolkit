@@ -10,7 +10,7 @@ const Index = () => {
           <img 
             src="https://www.lyzr.ai/wp-content/uploads/2023/11/cropped-Lyzr-Logo-1.png" 
             alt="Lyzr Logo" 
-            className="h-12 w-auto"
+            className="h-36 w-auto"
           />
         </div>
 
