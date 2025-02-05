@@ -22,9 +22,17 @@ const SectionScore = ({ title, questionIds, questions, answers, sectionScore }: 
           const question = questions.find(q => q.id === id);
           if (!question) return null;
 
+          const questionScore = getQuestionScore(id, questions, answers);
+          const scoreColor = questionScore > 0 ? 'text-green-600' : questionScore < 0 ? 'text-red-600' : 'text-gray-600';
+
           return (
             <div key={id} className="mt-4 p-4 bg-gray-50 rounded-lg">
-              <p className="text-sm font-medium mb-2">Question {id}: {question.question}</p>
+              <p className="text-sm font-medium mb-2">
+                Question {id}: {question.question} 
+                <span className={`ml-2 ${scoreColor}`}>
+                  ({questionScore > 0 ? '+' : ''}{questionScore} points)
+                </span>
+              </p>
               
               <div className="ml-4 space-y-3">
                 <p className="text-sm font-medium text-gray-700">Your answer(s):</p>
@@ -60,7 +68,7 @@ const SectionScore = ({ title, questionIds, questions, answers, sectionScore }: 
                     "bg-gray-500"
                   }`} />
                   <p className="text-sm text-gray-600">
-                    Total impact: {getQuestionScore(id, questions, answers)} points
+                    Total impact: {questionScore} points
                   </p>
                 </div>
               </div>
@@ -73,3 +81,4 @@ const SectionScore = ({ title, questionIds, questions, answers, sectionScore }: 
 };
 
 export default SectionScore;
+
