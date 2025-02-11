@@ -35,11 +35,11 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-b from-[#F6F6F7] via-white to-[#F1F1F1] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto relative">
         {/* Header with Title and Logo */}
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 max-w-2xl">
+        <div className="flex justify-between items-center mb-12">
+          <h1 className="text-4xl font-bold text-[#403E43] max-w-2xl leading-tight">
             Fast-Track Your AI Adoption with a Personalized Readiness Plan
           </h1>
           <img 
@@ -49,20 +49,20 @@ const Index = () => {
           />
         </div>
 
-        <div className="mb-12">
+        <div className="mb-16">
           <div>
-            <div className="max-w-3xl space-y-6">
-              <p className="text-lg text-gray-600">
-                Every business wants to accelerate <span className="font-semibold">Gen AI adoption</span>, but many struggle with <span className="font-semibold">where to start</span> and <span className="font-semibold">how to scale AI effectively</span>.
+            <div className="max-w-3xl space-y-8">
+              <p className="text-lg text-[#8E9196]">
+                Every business wants to accelerate <span className="font-semibold text-[#403E43]">Gen AI adoption</span>, but many struggle with <span className="font-semibold text-[#403E43]">where to start</span> and <span className="font-semibold text-[#403E43]">how to scale AI effectively</span>.
               </p>
               
-              <p className="text-lg text-gray-600">
-                At Lyzr, we've worked with <span className="font-semibold">100+ companies</span> and spoken to <span className="font-semibold">1,000s of business leaders</span>—one key insight stood out: <span className="font-semibold">AI success depends on strategy, governance, culture, and execution.</span>
+              <p className="text-lg text-[#8E9196]">
+                At Lyzr, we've worked with <span className="font-semibold text-[#403E43]">100+ companies</span> and spoken to <span className="font-semibold text-[#403E43]">1,000s of business leaders</span>—one key insight stood out: <span className="font-semibold text-[#403E43]">AI success depends on strategy, governance, culture, and execution.</span>
               </p>
 
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 mt-8">
-                <h2 className="text-xl font-semibold mb-4">What You Get from This 5-Minute Assessment:</h2>
-                <ul className="space-y-3">
+              <div className="bg-white/80 backdrop-blur-sm p-8 rounded-xl shadow-sm border border-gray-100/50">
+                <h2 className="text-2xl font-semibold mb-6 text-[#403E43]">What You Get from This 5-Minute Assessment:</h2>
+                <ul className="space-y-4">
                   {[
                     {
                       title: "Personalized AI Readiness Score",
@@ -81,11 +81,11 @@ const Index = () => {
                       description: "Eligible participants can explore a 3-month AI pilot to kickstart real-world AI applications."
                     }
                   ].map((benefit, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-lyzr-purple flex-shrink-0 mt-1" />
+                    <li key={index} className="flex items-start gap-4">
+                      <CheckCircle2 className="w-6 h-6 text-lyzr-purple flex-shrink-0 mt-1" />
                       <div>
-                        <span className="font-medium text-gray-900">{benefit.title}</span>
-                        <p className="text-sm text-gray-600">{benefit.description}</p>
+                        <span className="font-medium text-[#403E43] text-lg">{benefit.title}</span>
+                        <p className="text-[#8E9196] mt-1">{benefit.description}</p>
                       </div>
                     </li>
                   ))}
@@ -97,7 +97,7 @@ const Index = () => {
 
         {!showAssessment ? (
           <>
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-8">
               <PillarSelection 
                 pillars={pillars}
                 onTogglePillar={handleTogglePillar}
@@ -106,28 +106,28 @@ const Index = () => {
               <PreparednessLevels />
             </div>
             
-            <div className="mt-8 space-y-6">
-              <div className="space-y-2">
-                <h3 className="text-xl font-semibold">What's Next?</h3>
-                <p className="text-gray-600">Take the 5-minute AI Readiness Assessment and unlock your AI roadmap.</p>
-                <p className="text-gray-600">If you qualify, discuss a <span className="font-semibold">3-month AI pilot</span> with our experts at Lyzr.</p>
+            <div className="mt-12 space-y-8">
+              <div className="space-y-3">
+                <h3 className="text-2xl font-semibold text-[#403E43]">What's Next?</h3>
+                <p className="text-[#8E9196]">Take the 5-minute AI Readiness Assessment and unlock your AI roadmap.</p>
+                <p className="text-[#8E9196]">If you qualify, discuss a <span className="font-semibold text-[#403E43]">3-month AI pilot</span> with our experts at Lyzr.</p>
               </div>
               
               <div>
                 <Button 
                   onClick={handleStartAssessment}
-                  className="w-full md:w-auto px-8 py-6 text-lg bg-gradient-to-r from-violet-500 to-rose-500 hover:opacity-90"
+                  className="w-full md:w-auto px-8 py-6 text-lg bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:opacity-90 transition-all duration-200"
                   disabled={!pillars.some(p => p.enabled)}
                 >
                   Start Assessment →
                 </Button>
                 
-                <p className="text-sm text-gray-500 italic mt-2">Your AI transformation starts here!</p>
+                <p className="text-sm text-[#8A898C] italic mt-3">Your AI transformation starts here!</p>
               </div>
             </div>
           </>
         ) : (
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100/50 p-8">
             <AssessmentTab />
           </div>
         )}
