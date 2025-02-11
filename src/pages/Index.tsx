@@ -37,21 +37,20 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto relative">
-        {/* Lyzr Logo */}
-        <div className="absolute top-0 right-0">
+        {/* Header with Title and Logo */}
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 max-w-2xl">
+            Fast-Track Your AI Adoption with a Personalized Readiness Plan
+          </h1>
           <img 
             src="https://i0.wp.com/www.lyzr.ai/wp-content/uploads/2024/11/cropped_lyzr_logo_1.webp?fit=452%2C180&ssl=1" 
             alt="Lyzr Logo" 
-            className="h-12 w-auto"
+            className="h-8 w-auto ml-4"
           />
         </div>
 
         <div className="mb-12">
           <div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              Fast-Track Your AI Adoption with a Personalized Readiness Plan
-            </h1>
-            
             <div className="max-w-3xl space-y-6">
               <p className="text-lg text-gray-600">
                 Every business wants to accelerate <span className="font-semibold">Gen AI adoption</span>, but many struggle with <span className="font-semibold">where to start</span> and <span className="font-semibold">how to scale AI effectively</span>.
