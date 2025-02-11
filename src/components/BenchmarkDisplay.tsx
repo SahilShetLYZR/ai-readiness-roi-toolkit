@@ -1,3 +1,4 @@
+
 import { Progress } from "@/components/ui/progress";
 import { Industry } from "@/utils/industryWeights";
 import { industryBenchmarks, getReadinessLevel } from "@/utils/industryBenchmarks";
@@ -8,6 +9,23 @@ interface BenchmarkDisplayProps {
   score: number;
   industry: Industry;
 }
+
+const getRecommendationUrl = (recommendation: string): string => {
+  // Map recommendations to URLs
+  const urlMap: Record<string, string> = {
+    "Expand into Agentic AI-driven automation": "https://www.lyzr.ai/blog/lyzr-introduces-agentmesh-architecture/",
+    "Implement real-time AI decision systems": "https://www.lyzr.ai/enterprise/",
+    "Explore predictive analytics & AI-driven customer insights": "https://studio.lyzr.ai/responsible-ai/",
+    "Strengthen AI governance & security frameworks": "https://studio.lyzr.ai/responsible-ai/",
+    "Optimize data pipelines for better AI accuracy": "https://www.lyzr.ai/pricing/",
+    "Expand AI adoption into new business functions": "https://www.youtube.com/watch?v=SiRwqf6pPU0",
+    "See how SurePeople automated talent assessment with AI in weeks": "https://www.lyzr.ai/blog/surepeoples-success-story/",
+    "Learn from NTT Data's success in building a Risk Assessment AI Agent": "https://www.lyzr.ai/blog/ntt-data-success-story/",
+    "Start with proven AI use cases from our customer success stories": "https://www.lyzr.ai/blog/"
+  };
+  
+  return urlMap[recommendation] || "https://www.lyzr.ai/resources/";
+};
 
 const BenchmarkDisplay = ({ score, industry }: BenchmarkDisplayProps) => {
   const benchmark = industryBenchmarks[industry];
@@ -63,9 +81,19 @@ const BenchmarkDisplay = ({ score, industry }: BenchmarkDisplayProps) => {
           
           <div className="mt-3">
             <p className="text-sm font-medium mb-2">Recommended Next Steps:</p>
-            <ul className="list-disc pl-5 text-sm space-y-1">
+            <ul className="list-none pl-0 text-sm space-y-2">
               {readinessLevel.recommendations.map((rec, index) => (
-                <li key={index}>{rec}</li>
+                <li key={index} className="flex items-center space-x-2">
+                  <span className="text-gray-400">•</span>
+                  <a 
+                    href={getRecommendationUrl(rec)} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-lyzr-purple hover:underline"
+                  >
+                    {rec}
+                  </a>
+                </li>
               ))}
             </ul>
           </div>
