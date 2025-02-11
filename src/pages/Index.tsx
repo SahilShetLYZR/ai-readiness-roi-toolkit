@@ -29,7 +29,7 @@ const Index = () => {
                 AI is transforming industries, but is your business truly ready to harness its full potential?
               </p>
               <p className="mb-6">
-                This AI Readiness Assessment evaluates your organization's AI capabilities across six key dimensions 
+                This AI Readiness Assessment evaluates your organization's AI capabilities across key dimensions 
                 and provides a personalized, prescriptive roadmap to accelerate AI adoption.
               </p>
             </div>
@@ -40,25 +40,25 @@ const Index = () => {
                 <li className="flex items-start">
                   <span className="text-green-500 font-bold mr-2">✓</span>
                   <span>
-                    <strong>Benchmark Your AI Maturity</strong> – Understand where you stand compared to industry best practices.
+                    <strong>Benchmark Your AI Maturity</strong> – Understand where you stand compared to industry best practices
                   </span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 font-bold mr-2">✓</span>
                   <span>
-                    <strong>Get Tailored Recommendations</strong> – Receive a custom AI readiness score (0-99) with actionable steps.
+                    <strong>Get Tailored Recommendations</strong> – Receive a custom AI readiness score (0-99) with actionable steps
                   </span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 font-bold mr-2">✓</span>
                   <span>
-                    <strong>Identify Quick Wins & Gaps</strong> – Discover key areas that need attention for successful AI implementation.
+                    <strong>Identify Quick Wins & Gaps</strong> – Discover key areas that need attention for successful AI implementation
                   </span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 font-bold mr-2">✓</span>
                   <span>
-                    <strong>Explore a 3-Month AI Pilot</strong> – If eligible, you'll have the opportunity to discuss a limited 3-month AI pilot program with Lyzr.
+                    <strong>Explore a 3-Month AI Pilot</strong> – If eligible, you'll have the opportunity to discuss a limited 3-month AI pilot program with Lyzr
                   </span>
                 </li>
               </ul>

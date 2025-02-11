@@ -1,154 +1,133 @@
+
 import { Question } from "@/types/assessment";
 
 export const questions: Question[] = [
+  // AI Strategy & Business Alignment
   {
     id: 1,
-    question: "What primary goal are you looking to achieve with AI?",
-    type: "multi",
+    question: "Does your organization have a defined AI strategy?",
+    type: "single",
     options: [
-      "Increase operational efficiency",
-      "Reduce costs",
-      "Improve customer experience",
-      "Drive innovation & create new business models",
-      "Enable data-driven decision-making at scale",
+      "AI is a core part of our business strategy with executive buy-in",
+      "AI initiatives exist but are not aligned across the company",
+      "AI is used in some areas, but no formal strategy",
+      "No clear AI strategy"
     ],
     weights: {
-      "Increase operational efficiency": 5,
-      "Reduce costs": 5,
-      "Improve customer experience": 10,
-      "Drive innovation & create new business models": 15,
-      "Enable data-driven decision-making at scale": 15,
+      "AI is a core part of our business strategy with executive buy-in": 20,
+      "AI initiatives exist but are not aligned across the company": 15,
+      "AI is used in some areas, but no formal strategy": 10,
+      "No clear AI strategy": 0
     }
   },
   {
     id: 2,
-    question: "Which AI-powered capabilities would provide the highest ROI for your business?",
-    type: "multi",
+    question: "How does your organization measure AI's impact on business outcomes?",
+    type: "single",
     options: [
-      "Process automation",
-      "Predictive analytics for forecasting & optimization",
-      "Natural language processing (NLP) for engagement",
-      "Computer vision & image recognition",
-      "AI-driven decision support systems",
-      "AI-driven risk & security analytics",
+      "AI ROI and KPIs are clearly tracked",
+      "Some measurement exists, but it's inconsistent",
+      "AI projects are happening, but impact is unclear",
+      "No measurement of AI impact"
     ],
     weights: {
-      "Process automation": 10,
-      "Predictive analytics for forecasting & optimization": 15,
-      "Natural language processing (NLP) for engagement": 10,
-      "Computer vision & image recognition": 10,
-      "AI-driven decision support systems": 15,
-      "AI-driven risk & security analytics": 15,
+      "AI ROI and KPIs are clearly tracked": 20,
+      "Some measurement exists, but it's inconsistent": 15,
+      "AI projects are happening, but impact is unclear": 10,
+      "No measurement of AI impact": 0
     }
   },
   {
     id: 3,
-    question: "How do you measure the success of AI in your organization?",
-    type: "multi",
+    question: "What is the primary driver for AI adoption in your organization?",
+    type: "single",
     options: [
-      "Cost savings & operational efficiency improvements",
-      "Productivity gains (automation rate, time savings)",
-      "Customer experience & engagement improvements",
-      "AI adoption rate & automation impact",
-      "Revenue growth driven by AI solutions",
+      "AI is a strategic differentiator for competitive advantage",
+      "AI is used to automate tasks and reduce costs",
+      "AI is being experimented with but not fully deployed",
+      "No clear driver for AI adoption"
     ],
     weights: {
-      "Cost savings & operational efficiency improvements": 10,
-      "Productivity gains (automation rate, time savings)": 10,
-      "Customer experience & engagement improvements": 10,
-      "AI adoption rate & automation impact": 15,
-      "Revenue growth driven by AI solutions": 15,
+      "AI is a strategic differentiator for competitive advantage": 20,
+      "AI is used to automate tasks and reduce costs": 15,
+      "AI is being experimented with but not fully deployed": 10,
+      "No clear driver for AI adoption": 0
     }
   },
+  // People & AI Talent
   {
     id: 4,
-    question: "What challenges do you face with your data?",
-    type: "multi",
+    question: "Who is responsible for AI adoption in your organization?",
+    type: "single",
     options: [
-      "Volume – Too much data to process",
-      "Variety – Data from multiple sources (PDFs, Word, images, etc.)",
-      "Velocity – Real-time analytics issues",
-      "Veracity – Data accuracy & reliability concerns",
-      "Value – Struggle to extract business insights",
+      "Dedicated AI team with collaboration across business & IT",
+      "IT team leads AI initiatives",
+      "Business teams are exploring AI but lack structure",
+      "No clear ownership of AI initiatives"
     ],
     weights: {
-      "Volume – Too much data to process": -5,
-      "Variety – Data from multiple sources (PDFs, Word, images, etc.)": -3,
-      "Velocity – Real-time analytics issues": -3,
-      "Veracity – Data accuracy & reliability concerns": -5,
-      "Value – Struggle to extract business insights": -5,
+      "Dedicated AI team with collaboration across business & IT": 20,
+      "IT team leads AI initiatives": 15,
+      "Business teams are exploring AI but lack structure": 10,
+      "No clear ownership of AI initiatives": 0
     }
   },
   {
     id: 5,
-    question: "What challenges do you face in integrating AI with your existing workflows?",
-    type: "multi",
-    options: [
-      "Technical complexity",
-      "Data quality issues",
-      "Lack of AI expertise & skills",
-      "Budget constraints",
-      "Cultural resistance to AI adoption",
-    ],
-    weights: {
-      "Technical complexity": -5,
-      "Data quality issues": -5,
-      "Lack of AI expertise & skills": -5,
-      "Budget constraints": -3,
-      "Cultural resistance to AI adoption": -3,
-    }
-  },
-  {
-    id: 6,
-    question: "What level of automation exists in your business processes today?",
+    question: "How well do employees across departments understand AI?",
     type: "single",
     options: [
-      "Fully automated – AI-driven workflows in multiple areas",
-      "Partially automated – AI is used, but manual processes remain",
-      "Limited automation – Only basic AI tools (e.g., chatbots, analytics)",
-      "No automation – All processes are manual",
+      "AI training is widespread across departments",
+      "AI awareness exists, but no formal training",
+      "AI knowledge is limited to technical teams",
+      "No AI training or awareness"
     ],
     weights: {
-      "Fully automated – AI-driven workflows in multiple areas": 15,
-      "Partially automated – AI is used, but manual processes remain": 10,
-      "Limited automation – Only basic AI tools (e.g., chatbots, analytics)": 5,
-      "No automation – All processes are manual": 0,
+      "AI training is widespread across departments": 20,
+      "AI awareness exists, but no formal training": 15,
+      "AI knowledge is limited to technical teams": 10,
+      "No AI training or awareness": 0
+    }
+  },
+  // AI Use Cases & Applications
+  {
+    id: 6,
+    question: "What AI-powered solutions does your organization currently use?",
+    type: "multi",
+    options: [
+      "Conversational AI for customer support",
+      "AI-powered document processing",
+      "AI-driven image or video recognition",
+      "AI-generated content (text, images, video)",
+      "AI-powered search and knowledge retrieval",
+      "AI for deep research and summarization",
+      "No AI use cases currently"
+    ],
+    weights: {
+      "Conversational AI for customer support": 10,
+      "AI-powered document processing": 10,
+      "AI-driven image or video recognition": 10,
+      "AI-generated content (text, images, video)": 10,
+      "AI-powered search and knowledge retrieval": 10,
+      "AI for deep research and summarization": 10,
+      "No AI use cases currently": 0
     }
   },
   {
     id: 7,
-    question: "Does your organization have an AI governance framework for security and compliance?",
+    question: "How AI-driven is decision-making in your organization?",
     type: "single",
     options: [
-      "Yes – Well-defined AI governance & policies in place",
-      "Somewhat – Initial policies exist, but enforcement is weak",
-      "Not yet – We are exploring governance frameworks",
-      "No – No AI governance policies in place",
+      "AI insights drive key business decisions",
+      "AI informs decisions but is not central",
+      "AI is experimental, with limited impact on decisions",
+      "AI is not used for decision-making"
     ],
     weights: {
-      "Yes – Well-defined AI governance & policies in place": 15,
-      "Somewhat – Initial policies exist, but enforcement is weak": 10,
-      "Not yet – We are exploring governance frameworks": 5,
-      "No – No AI governance policies in place": 0,
-    }
-  },
-  {
-    id: 8,
-    question: "What is your organization's biggest barrier to AI adoption?",
-    type: "multi",
-    options: [
-      "Lack of technical expertise",
-      "Resistance to change",
-      "Budget limitations",
-      "Uncertainty about ROI",
-      "Data privacy & security concerns",
-    ],
-    weights: {
-      "Lack of technical expertise": -5,
-      "Resistance to change": -3,
-      "Budget limitations": -3,
-      "Uncertainty about ROI": -5,
-      "Data privacy & security concerns": -4,
+      "AI insights drive key business decisions": 20,
+      "AI informs decisions but is not central": 15,
+      "AI is experimental, with limited impact on decisions": 10,
+      "AI is not used for decision-making": 0
     }
   }
 ];

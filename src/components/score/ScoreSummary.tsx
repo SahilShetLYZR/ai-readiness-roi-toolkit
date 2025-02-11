@@ -1,6 +1,9 @@
+
 import { Button } from "../ui/button";
 import { ExternalLink } from "lucide-react";
 import { Industry } from "@/utils/industryWeights";
+import { Checkbox } from "../ui/checkbox";
+import { useState } from "react";
 
 interface ScoreSummaryProps {
   score: number;
@@ -8,6 +11,8 @@ interface ScoreSummaryProps {
 }
 
 const ScoreSummary = ({ score, industry }: ScoreSummaryProps) => {
+  const [interestedInPilot, setInterestedInPilot] = useState(false);
+
   const getSummary = () => {
     if (score >= 70) {
       return {
@@ -20,9 +25,9 @@ const ScoreSummary = ({ score, industry }: ScoreSummaryProps) => {
             description: "Explore AgentMesh Architecture"
           },
           {
-            title: "Expert AI Agents",
-            url: "https://www.lyzr.ai/blog/mixture-of-expert-agents/",
-            description: "Learn about Mixture of Expert Agents"
+            title: "Research Projects",
+            url: "https://www.lyzr.ai/research-projects/",
+            description: "Explore AI Innovation & Academic Collaboration"
           },
           {
             title: "Enterprise AI Framework",
@@ -30,14 +35,14 @@ const ScoreSummary = ({ score, industry }: ScoreSummaryProps) => {
             description: "Organizational General Intelligence"
           },
           {
-            title: "AI Security",
-            url: "https://www.researchgate.net/publication/388554578_AgentDefender_by_Lyzr_A_Benchmark_Evaluation_and_Neural_Embedding_Approach_for_Agent_Prompt_Injection/",
-            description: "AgentDefender Research"
+            title: "AWS Partnership",
+            url: "https://www.lyzr.ai/partnership/aws/",
+            description: "Scale with AWS Integration"
           },
           {
-            title: "Scale with AWS",
-            url: "https://www.lyzr.ai/partnership/aws/",
-            description: "AWS Partnership Integration"
+            title: "Expert AI Agents",
+            url: "https://www.lyzr.ai/blog/mixture-of-expert-agents/",
+            description: "Learn about Mixture of Expert Agents"
           }
         ]
       };
@@ -57,14 +62,14 @@ const ScoreSummary = ({ score, industry }: ScoreSummaryProps) => {
             description: "Learn about Enterprise-Grade GenAI Stack"
           },
           {
+            title: "Lyzr Studio",
+            url: "https://studio.lyzr.ai/",
+            description: "Prototype AI Solutions"
+          },
+          {
             title: "Ready-to-Use AI Apps",
             url: "https://studio.lyzr.ai/app-store/",
             description: "Explore Lyzr App Store"
-          },
-          {
-            title: "AI Governance",
-            url: "https://studio.lyzr.ai/responsible-ai/",
-            description: "Explore Responsible AI Demos"
           }
         ]
       };
@@ -98,6 +103,25 @@ const ScoreSummary = ({ score, industry }: ScoreSummaryProps) => {
     }
   };
 
+  const getIndustryAgents = () => {
+    switch (industry) {
+      case "Finance & Banking":
+        return "https://www.lyzr.ai/banking-agents/";
+      case "Technology & Software":
+        return "https://www.lyzr.ai/sales-agents/";
+      case "Retail & E-commerce":
+        return "https://www.lyzr.ai/marketing-agents/";
+      case "Education":
+        return "https://www.lyzr.ai/hr-agents/";
+      case "Telecommunications":
+        return "https://www.lyzr.ai/customer-service-agents/";
+      case "Government & Public Sector":
+        return "https://www.lyzr.ai/financial-services-agents/";
+      default:
+        return "https://www.lyzr.ai/agents/";
+    }
+  };
+
   const summary = getSummary();
 
   return (
@@ -116,22 +140,56 @@ const ScoreSummary = ({ score, industry }: ScoreSummaryProps) => {
           </Button>
           <Button
             variant="outline"
-            onClick={() => window.open("https://studio.lyzr.ai/responsible-ai/", "_blank")}
+            onClick={() => window.open(getIndustryAgents(), "_blank")}
           >
-            Explore Responsible AI
+            Explore Industry AI Agents
           </Button>
         </div>
 
         <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-          <h4 className="font-medium text-gray-900 mb-2">Interested in a 3-Month AI Pilot?</h4>
+          <h4 className="font-medium text-gray-900 mb-2">3-Month AI Pilot Program</h4>
           <p className="text-sm text-gray-600 mb-4">
             Eligible organizations can participate in a limited 3-month AI pilot program with Lyzr.
           </p>
+          <div className="flex items-center space-x-2 mb-4">
+            <Checkbox
+              id="pilot"
+              checked={interestedInPilot}
+              onCheckedChange={(checked) => setInterestedInPilot(checked as boolean)}
+            />
+            <label
+              htmlFor="pilot"
+              className="text-sm text-gray-700"
+            >
+              Yes, I'd like to be contacted about a 3-month AI pilot
+            </label>
+          </div>
           <Button
             onClick={() => window.open("https://www.lyzr.ai/book-demo/", "_blank")}
             className="w-full"
+            disabled={!interestedInPilot}
           >
             Check Pilot Eligibility
+          </Button>
+        </div>
+      </div>
+
+      <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+        <h4 className="font-medium text-gray-900 mb-2">Responsible AI Resources</h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <Button
+            variant="outline"
+            className="w-full"
+            onClick={() => window.open("https://studio.lyzr.ai/responsible-ai/", "_blank")}
+          >
+            Explore AI Governance
+          </Button>
+          <Button
+            variant="outline"
+            className="w-full"
+            onClick={() => window.open("https://www.researchgate.net/publication/388554578_AgentDefender_by_Lyzr_A_Benchmark_Evaluation_and_Neural_Embedding_Approach_for_Agent_Prompt_Injection/", "_blank")}
+          >
+            AI Security Research
           </Button>
         </div>
       </div>
