@@ -1,7 +1,38 @@
 
+import { useState } from "react";
 import AssessmentTab from "@/components/AssessmentTab";
+import PillarSelection from "@/components/PillarSelection";
+import PreparednessLevels from "@/components/PreparednessLevels";
+import { Button } from "@/components/ui/button";
 
 const Index = () => {
+  const [pillars, setPillars] = useState([
+    { name: "Strategy", enabled: false },
+    { name: "Infrastructure", enabled: false },
+    { name: "Data", enabled: false },
+    { name: "Governance", enabled: false },
+    { name: "Talent", enabled: false },
+    { name: "Culture", enabled: false },
+  ]);
+  
+  const [showAssessment, setShowAssessment] = useState(false);
+
+  const handleTogglePillar = (name: string) => {
+    setPillars(prev => prev.map(p => 
+      p.name === name ? { ...p, enabled: !p.enabled } : p
+    ));
+  };
+
+  const handleToggleAll = (enabled: boolean) => {
+    setPillars(prev => prev.map(p => ({ ...p, enabled })));
+  };
+
+  const handleStartAssessment = () => {
+    if (pillars.some(p => p.enabled)) {
+      setShowAssessment(true);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto relative">
@@ -16,67 +47,39 @@ const Index = () => {
 
         <div className="mb-12">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-lyzr-blue mb-6">
+            <h1 className="text-4xl font-bold text-gray-900 mb-6">
               AI Readiness Assessment
             </h1>
             
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-              Unlock Your AI Readiness Score & Get Actionable Insights
-            </h2>
-
-            <div className="text-lg text-gray-600 mt-6 max-w-3xl mx-auto">
-              <p className="mb-4">
-                AI is transforming industries, but is your business truly ready to harness its full potential?
-              </p>
-              <p className="mb-6">
-                This AI Readiness Assessment evaluates your organization's AI capabilities across key dimensions 
-                and provides a personalized, prescriptive roadmap to accelerate AI adoption.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100 mb-8">
-              <h3 className="text-xl font-semibold mb-4">Why Take This Assessment?</h3>
-              <ul className="space-y-3 text-left">
-                <li className="flex items-start">
-                  <span className="text-green-500 font-bold mr-2">✓</span>
-                  <span>
-                    <strong>Benchmark Your AI Maturity</strong> – Understand where you stand compared to industry best practices
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-500 font-bold mr-2">✓</span>
-                  <span>
-                    <strong>Get Tailored Recommendations</strong> – Receive a custom AI readiness score (0-99) with actionable steps
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-500 font-bold mr-2">✓</span>
-                  <span>
-                    <strong>Identify Quick Wins & Gaps</strong> – Discover key areas that need attention for successful AI implementation
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-500 font-bold mr-2">✓</span>
-                  <span>
-                    <strong>Explore a 3-Month AI Pilot</strong> – If eligible, you'll have the opportunity to discuss a limited 3-month AI pilot program with Lyzr
-                  </span>
-                </li>
-              </ul>
-            </div>
-
-            <p className="text-lg font-medium text-gray-800">
-              👉 Take this short assessment (5 minutes) and get your AI readiness score instantly!
-            </p>
-            
-            <p className="text-sm italic mt-4 text-gray-600">
-              Please select your Industry from the drop-down below for benchmarking
+            <p className="text-lg text-gray-600 mt-6 max-w-3xl mx-auto">
+              Artificial intelligence has permeated across industries for years. And today, it is revolutionizing organizations and the anatomy of work. Nevertheless, it's important to recognize that not every company, despite their optimism, is fully equipped to adopt this technology. Being AI-ready requires combining six critical pillars – Strategy, Infrastructure, Data, Governance, Talent, and Culture. This assessment tool helps companies understand their level of readiness across each of these pillars.
             </p>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-          <AssessmentTab />
-        </div>
+        {!showAssessment ? (
+          <div className="grid md:grid-cols-2 gap-6">
+            <PillarSelection 
+              pillars={pillars}
+              onTogglePillar={handleTogglePillar}
+              onToggleAll={handleToggleAll}
+            />
+            <PreparednessLevels />
+            <div className="md:col-span-2">
+              <Button 
+                onClick={handleStartAssessment}
+                className="w-full py-6 text-lg"
+                disabled={!pillars.some(p => p.enabled)}
+              >
+                Take assessment
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+            <AssessmentTab />
+          </div>
+        )}
       </div>
     </div>
   );
