@@ -47,12 +47,12 @@ const Index = () => {
         </div>
 
         <div className="mb-12">
-          <div className="text-center">
+          <div>
             <h1 className="text-4xl font-bold text-gray-900 mb-4">
               Fast-Track Your AI Adoption with a Personalized Readiness Plan
             </h1>
             
-            <div className="max-w-3xl mx-auto space-y-6">
+            <div className="max-w-3xl space-y-6">
               <p className="text-lg text-gray-600">
                 Every business wants to accelerate <span className="font-semibold">Gen AI adoption</span>, but many struggle with <span className="font-semibold">where to start</span> and <span className="font-semibold">how to scale AI effectively</span>.
               </p>
@@ -107,22 +107,24 @@ const Index = () => {
               <PreparednessLevels />
             </div>
             
-            <div className="mt-8 text-center space-y-6">
+            <div className="mt-8 space-y-6">
               <div className="space-y-2">
                 <h3 className="text-xl font-semibold">What's Next?</h3>
                 <p className="text-gray-600">Take the 5-minute AI Readiness Assessment and unlock your AI roadmap.</p>
                 <p className="text-gray-600">If you qualify, discuss a <span className="font-semibold">3-month AI pilot</span> with our experts at Lyzr.</p>
               </div>
               
-              <Button 
-                onClick={handleStartAssessment}
-                className="w-full max-w-md py-6 text-lg bg-gradient-to-r from-violet-500 to-rose-500 hover:opacity-90"
-                disabled={!pillars.some(p => p.enabled)}
-              >
-                Start Assessment →
-              </Button>
-              
-              <p className="text-sm text-gray-500 italic">Your AI transformation starts here!</p>
+              <div>
+                <Button 
+                  onClick={handleStartAssessment}
+                  className="w-full md:w-auto px-8 py-6 text-lg bg-gradient-to-r from-violet-500 to-rose-500 hover:opacity-90"
+                  disabled={!pillars.some(p => p.enabled)}
+                >
+                  Start Assessment →
+                </Button>
+                
+                <p className="text-sm text-gray-500 italic mt-2">Your AI transformation starts here!</p>
+              </div>
             </div>
           </>
         ) : (
